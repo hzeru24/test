@@ -194,7 +194,7 @@
         return;
       }
 
-      window.location.href = `journal.html?id=${encodeURIComponent(data.id)}`;
+      window.location.href = "index.html";
     });
   }
 
