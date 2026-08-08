@@ -72,25 +72,34 @@
     list.innerHTML = "";
 
     data.forEach((entry) => {
-      const card = document.createElement("article");
-      card.className = "journal-card";
+  const card = document.createElement("article");
+  card.className = "journal-card";
 
-      card.innerHTML = `
-        <div class="journal-card-main">
-          <h2>${escapeHTML(entry.title)} <span>(Anonymous)</span></h2>
-          <p>${escapeHTML(excerpt(entry.content))}</p>
-        </div>
+  card.innerHTML = `
+    <div class="journal-date">
+      ${escapeHTML(formatDate(entry.created_at))}
+    </div>
 
-        <div class="journal-card-side">
-          <div class="posted">Posted: ${escapeHTML(formatDate(entry.created_at))}</div>
-          <a class="read-button" href="journal.html?id=${encodeURIComponent(entry.id)}">
-            READ JOURNAL
-          </a>
-        </div>
-      `;
+    <h2 class="journal-title">
+      ${escapeHTML(entry.title)}
+    </h2>
 
-      list.appendChild(card);
-    });
+    <div class="journal-author">
+      Anonymous
+    </div>
+
+    <div class="journal-content">
+      ${escapeHTML(excerpt(entry.content))}
+    </div>
+
+    <a class="read-button"
+       href="journal.html?id=${encodeURIComponent(entry.id)}">
+      READ JOURNAL
+    </a>
+  `;
+
+  list.appendChild(card);
+});
   }
 
   function setupToolbar() {
