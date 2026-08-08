@@ -9,25 +9,59 @@
     config.supabaseKey.includes("PASTE_YOUR")
   ) {
     console.error("Supabase is not configured. Edit config.js.");
-    showText("status", "Supabase is not configured yet. Edit config.js.");
-    showText("write-status", "Supabase is not configured yet. Edit config.js.");
-    showText("entry-status", "Supabase is not configured yet. Edit config.js.");
+
+    showText(
+      "status",
+      "Supabase is not configured yet. Edit config.js."
+    );
+
+    showText(
+      "write-status",
+      "Supabase is not configured yet. Edit config.js."
+    );
+
+    showText(
+      "entry-status",
+      "Supabase is not configured yet. Edit config.js."
+    );
+
     return;
   }
 
   const { createClient } = window.supabase;
-  const supabase = createClient(config.supabaseUrl, config.supabaseKey);
+  const supabase = createClient(
+    config.supabaseUrl,
+    config.supabaseKey
+  );
 
   const MAX_CONTENT = 20000;
 
+  // =========================================================
+  // PAGINATION
+  // =========================================================
+
+  const JOURNALS_PER_PAGE = 10;
+
+  let allJournalEntries = [];
+  let currentPage = 1;
+
+  // =========================================================
+  // GENERAL HELPERS
+  // =========================================================
+
   function showText(id, text) {
     const el = document.getElementById(id);
-    if (el) el.textContent = text;
+
+    if (el) {
+      el.textContent = text;
+    }
   }
 
   function escapeHTML(value) {
     const div = document.createElement("div");
+
     div.textContent = value ?? "";
+
     return div.innerHTML;
   }
 
@@ -43,218 +77,668 @@
 
   function getPlainText(html) {
     const div = document.createElement("div");
+
     div.innerHTML = html || "";
-    return (div.textContent || div.innerText || "").replace(/\s+/g, " ").trim();
+
+    return (
+      div.textContent ||
+      div.innerText ||
+      ""
+    )
+      .replace(/\s+/g, " ")
+      .trim();
   }
 
   function excerpt(html, length = 180) {
     const text = getPlainText(html);
-    return text.length > length ? text.slice(0, length).trim() + "..." : text;
+
+    return text.length > length
+      ? text.slice(0, length).trim() + "..."
+      : text;
   }
 
-  async function loadFeed() {
-    const list = document.getElementById("journal-list");
-    if (!list) return;
+  // =========================================================
+  // PAGINATION CONTAINER
+  // =========================================================
 
-    const { data, error } = await supabase
-      .from("journal_entries")
-      .select("id, title, content, created_at")
-      .order("created_at", { ascending: false });
+  function getPaginationContainer() {
+    let pagination =
+      document.getElementById("pagination");
 
-    if (error) {
-      console.error(error);
-      showText("status", "Could not load the journal. Check your Supabase settings and RLS policies.");
+    if (!pagination) {
+      pagination = document.createElement("nav");
+
+      pagination.id = "pagination";
+      pagination.className = "pagination";
+      pagination.setAttribute(
+        "aria-label",
+        "Journal pages"
+      );
+
+      const list =
+        document.getElementById("journal-list");
+
+      if (list) {
+        list.after(pagination);
+      }
+    }
+
+    return pagination;
+  }
+
+  // =========================================================
+  // RENDER PAGINATION
+  // =========================================================
+
+  function renderPagination() {
+    const pagination =
+      getPaginationContainer();
+
+    if (!pagination) {
       return;
     }
 
-    showText("status", data.length ? "" : "No journal entries yet.");
+    const totalPages = Math.ceil(
+      allJournalEntries.length /
+        JOURNALS_PER_PAGE
+    );
+
+    // Don't show pagination if there is only
+    // one page of journals.
+    if (totalPages <= 1) {
+      pagination.innerHTML = "";
+      pagination.style.display = "none";
+
+      return;
+    }
+
+    pagination.style.display = "flex";
+
+    let html = "";
+
+    // Previous button
+    html += `
+      <button
+        class="pagination-button pagination-arrow"
+        data-page="${currentPage - 1}"
+        ${currentPage === 1 ? "disabled" : ""}
+        aria-label="Previous page"
+      >
+        ←
+      </button>
+    `;
+
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+      html += `
+        <button
+          class="pagination-button ${
+            i === currentPage
+              ? "active"
+              : ""
+          }"
+          data-page="${i}"
+          aria-current="${
+            i === currentPage
+              ? "page"
+              : "false"
+          }"
+        >
+          ${i}
+        </button>
+      `;
+    }
+
+    // Next button
+    html += `
+      <button
+        class="pagination-button pagination-arrow"
+        data-page="${currentPage + 1}"
+        ${
+          currentPage === totalPages
+            ? "disabled"
+            : ""
+        }
+        aria-label="Next page"
+      >
+        →
+      </button>
+    `;
+
+    pagination.innerHTML = html;
+
+    pagination
+      .querySelectorAll(
+        ".pagination-button:not([disabled])"
+      )
+      .forEach((button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            const selectedPage =
+              Number(button.dataset.page);
+
+            if (
+              selectedPage < 1 ||
+              selectedPage > totalPages
+            ) {
+              return;
+            }
+
+            currentPage = selectedPage;
+
+            renderJournalPage();
+
+            // Scroll back toward the top of
+            // the journal list.
+            const list =
+              document.getElementById(
+                "journal-list"
+              );
+
+            if (list) {
+              const top =
+                list.getBoundingClientRect().top +
+                window.scrollY -
+                30;
+
+              window.scrollTo({
+                top,
+                behavior: "smooth"
+              });
+            }
+          }
+        );
+      });
+  }
+
+  // =========================================================
+  // RENDER JOURNAL PAGE
+  // =========================================================
+
+  function renderJournalPage() {
+    const list =
+      document.getElementById(
+        "journal-list"
+      );
+
+    if (!list) {
+      return;
+    }
 
     list.innerHTML = "";
 
-    data.forEach((entry) => {
-  const card = document.createElement("article");
-  card.className = "journal-card";
+    const start =
+      (currentPage - 1) *
+      JOURNALS_PER_PAGE;
 
-  card.innerHTML = `
-    <div class="journal-card-content">
+    const end =
+      start +
+      JOURNALS_PER_PAGE;
 
-      <div class="posted">
-        ${escapeHTML(formatDate(entry.created_at))}
-      </div>
+    const pageEntries =
+      allJournalEntries.slice(
+        start,
+        end
+      );
 
-      <h2 class="journal-card-title">
-        ${escapeHTML(entry.title)}
-      </h2>
+    pageEntries.forEach((entry) => {
+      const card =
+        document.createElement("article");
 
-      <div class="journal-card-anonymous">
-        Anonymous
-      </div>
+      card.className = "journal-card";
 
-      <p class="journal-card-preview">
-        ${escapeHTML(excerpt(entry.content))}
-      </p>
+      card.innerHTML = `
+        <div class="posted">
+          ${escapeHTML(
+            formatDate(entry.created_at)
+          )}
+        </div>
 
-      <a
-        class="read-button"
-        href="journal.html?id=${encodeURIComponent(entry.id)}"
-      >
-        READ JOURNAL
-      </a>
+        <h2 class="journal-card-title">
+          ${escapeHTML(entry.title)}
+        </h2>
 
-    </div>
-  `;
+        <div class="journal-card-anonymous">
+          Anonymous
+        </div>
 
-  list.appendChild(card);
-});
+        <p class="journal-card-preview">
+          ${escapeHTML(
+            excerpt(entry.content)
+          )}
+        </p>
+
+        <a
+          class="read-button"
+          href="journal.html?id=${encodeURIComponent(
+            entry.id
+          )}"
+        >
+          READ JOURNAL
+        </a>
+      `;
+
+      list.appendChild(card);
+    });
+
+    renderPagination();
   }
+
+  // =========================================================
+  // LOAD HOME JOURNALS
+  // =========================================================
+
+  async function loadFeed() {
+    const list =
+      document.getElementById(
+        "journal-list"
+      );
+
+    if (!list) {
+      return;
+    }
+
+    const { data, error } =
+      await supabase
+        .from("journal_entries")
+        .select(
+          "id, title, content, created_at"
+        )
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
+    if (error) {
+      console.error(error);
+
+      showText(
+        "status",
+        "Could not load the journal. Check your Supabase settings and RLS policies."
+      );
+
+      return;
+    }
+
+    allJournalEntries = data || [];
+
+    if (!allJournalEntries.length) {
+      showText(
+        "status",
+        "No journal entries yet."
+      );
+
+      return;
+    }
+
+    showText("status", "");
+
+    currentPage = 1;
+
+    renderJournalPage();
+  }
+
+  // =========================================================
+  // TOOLBAR
+  // =========================================================
 
   function setupToolbar() {
-    document.querySelectorAll("[data-command]").forEach((button) => {
-      button.addEventListener("mousedown", (event) => event.preventDefault());
+    document
+      .querySelectorAll("[data-command]")
+      .forEach((button) => {
+        button.addEventListener(
+          "mousedown",
+          (event) => {
+            event.preventDefault();
+          }
+        );
 
-      button.addEventListener("click", () => {
-        const command = button.dataset.command;
-        document.execCommand(command, false, null);
-        document.getElementById("editor")?.focus();
-        updateCounter();
+        button.addEventListener(
+          "click",
+          () => {
+            const command =
+              button.dataset.command;
+
+            document.execCommand(
+              command,
+              false,
+              null
+            );
+
+            document
+              .getElementById("editor")
+              ?.focus();
+
+            updateCounter();
+          }
+        );
       });
-    });
   }
+
+  // =========================================================
+  // CONTENT COUNTER
+  // =========================================================
 
   function updateCounter() {
-    const editor = document.getElementById("editor");
-    const counter = document.getElementById("counter");
-    if (!editor || !counter) return;
+    const editor =
+      document.getElementById("editor");
 
-    const count = (editor.innerText || "").length;
-    counter.textContent = `${count} / ${MAX_CONTENT}`;
+    const counter =
+      document.getElementById("counter");
 
-    counter.classList.toggle("limit-warning", count > MAX_CONTENT * 0.9);
+    if (!editor || !counter) {
+      return;
+    }
+
+    const count =
+      (editor.innerText || "").length;
+
+    counter.textContent =
+      `${count} / ${MAX_CONTENT}`;
+
+    counter.classList.toggle(
+      "limit-warning",
+      count > MAX_CONTENT * 0.9
+    );
   }
 
-  function setupEditor() {
-    const editor = document.getElementById("editor");
-    const title = document.getElementById("title");
-    const postButton = document.getElementById("post-button");
-    const status = document.getElementById("write-status");
+  // =========================================================
+  // WRITING EDITOR
+  // =========================================================
 
-    if (!editor || !title || !postButton) return;
+  function setupEditor() {
+    const editor =
+      document.getElementById("editor");
+
+    const title =
+      document.getElementById("title");
+
+    const postButton =
+      document.getElementById(
+        "post-button"
+      );
+
+    const status =
+      document.getElementById(
+        "write-status"
+      );
+
+    if (
+      !editor ||
+      !title ||
+      !postButton
+    ) {
+      return;
+    }
 
     setupToolbar();
     updateCounter();
 
-    editor.addEventListener("input", () => {
-      const text = editor.innerText || "";
-      if (text.length > MAX_CONTENT) {
-        const selection = window.getSelection();
-        editor.innerText = text.slice(0, MAX_CONTENT);
-        if (selection) {
-          selection.removeAllRanges();
-          const range = document.createRange();
-          range.selectNodeContents(editor);
-          range.collapse(false);
-          selection.addRange(range);
+    editor.addEventListener(
+      "input",
+      () => {
+        const text =
+          editor.innerText || "";
+
+        if (
+          text.length >
+          MAX_CONTENT
+        ) {
+          const selection =
+            window.getSelection();
+
+          editor.innerText =
+            text.slice(
+              0,
+              MAX_CONTENT
+            );
+
+          if (selection) {
+            selection.removeAllRanges();
+
+            const range =
+              document.createRange();
+
+            range.selectNodeContents(
+              editor
+            );
+
+            range.collapse(false);
+
+            selection.addRange(
+              range
+            );
+          }
         }
+
+        updateCounter();
       }
-      updateCounter();
-    });
+    );
 
-    postButton.addEventListener("click", async () => {
-      const cleanTitle = title.value.trim();
-      const rawContent = editor.innerHTML.trim();
-      const plainContent = getPlainText(rawContent);
+    postButton.addEventListener(
+      "click",
+      async () => {
+        const cleanTitle =
+          title.value.trim();
 
-      if (!cleanTitle) {
-        status.textContent = "Please enter a title.";
-        title.focus();
-        return;
-      }
+        const rawContent =
+          editor.innerHTML.trim();
 
-      if (!plainContent) {
-        status.textContent = "Please write something first.";
-        editor.focus();
-        return;
-      }
+        const plainContent =
+          getPlainText(
+            rawContent
+          );
 
-      if (plainContent.length > MAX_CONTENT) {
-        status.textContent = "Your entry is too long.";
-        return;
-      }
+        if (!cleanTitle) {
+          status.textContent =
+            "Please enter a title.";
 
-      const cleanContent = DOMPurify.sanitize(rawContent, {
-        ALLOWED_TAGS: [
-          "b", "strong", "i", "em", "u", "p", "br",
-          "div", "blockquote", "ul", "ol", "li"
-        ],
-        ALLOWED_ATTR: []
-      });
+          title.focus();
 
-      postButton.disabled = true;
-      status.textContent = "Posting...";
+          return;
+        }
 
-      const { data, error } = await supabase
-        .from("journal_entries")
-        .insert({
-          title: cleanTitle,
-          content: cleanContent
-        })
-        .select("id")
-        .single();
+        if (!plainContent) {
+          status.textContent =
+            "Please write something first.";
 
-      if (error) {
-        console.error(error);
+          editor.focus();
+
+          return;
+        }
+
+        if (
+          plainContent.length >
+          MAX_CONTENT
+        ) {
+          status.textContent =
+            "Your entry is too long.";
+
+          return;
+        }
+
+        const cleanContent =
+          DOMPurify.sanitize(
+            rawContent,
+            {
+              ALLOWED_TAGS: [
+                "b",
+                "strong",
+                "i",
+                "em",
+                "u",
+                "p",
+                "br",
+                "div",
+                "blockquote",
+                "ul",
+                "ol",
+                "li"
+              ],
+
+              ALLOWED_ATTR: []
+            }
+          );
+
+        postButton.disabled =
+          true;
+
         status.textContent =
-          "Posting failed. Check your Supabase URL/key, table permissions, and RLS policies.";
-        postButton.disabled = false;
-        return;
-      }
+          "Posting...";
 
-      window.location.href = "index.html";
-    });
+        const {
+          data,
+          error
+        } = await supabase
+          .from(
+            "journal_entries"
+          )
+          .insert({
+            title: cleanTitle,
+            content:
+              cleanContent
+          })
+          .select("id")
+          .single();
+
+        if (error) {
+          console.error(error);
+
+          status.textContent =
+            "Posting failed. Check your Supabase URL/key, table permissions, and RLS policies.";
+
+          postButton.disabled =
+            false;
+
+          return;
+        }
+
+        window.location.href =
+          "index.html";
+      }
+    );
   }
 
+  // =========================================================
+  // LOAD INDIVIDUAL JOURNAL
+  // =========================================================
+
   async function loadSingleEntry() {
-    const entry = document.getElementById("entry");
-    if (!entry) return;
+    const entry =
+      document.getElementById(
+        "entry"
+      );
 
-    const id = new URLSearchParams(window.location.search).get("id");
-
-    if (!id) {
-      showText("entry-status", "No journal entry was specified.");
+    if (!entry) {
       return;
     }
 
-    const { data, error } = await supabase
+    const id =
+      new URLSearchParams(
+        window.location.search
+      ).get("id");
+
+    if (!id) {
+      showText(
+        "entry-status",
+        "No journal entry was specified."
+      );
+
+      return;
+    }
+
+    const {
+      data,
+      error
+    } = await supabase
       .from("journal_entries")
-      .select("id, title, content, created_at")
+      .select(
+        "id, title, content, created_at"
+      )
       .eq("id", id)
       .single();
 
     if (error || !data) {
       console.error(error);
-      showText("entry-status", "This journal entry could not be found.");
+
+      showText(
+        "entry-status",
+        "This journal entry could not be found."
+      );
+
       return;
     }
 
-    const safeContent = DOMPurify.sanitize(data.content || "", {
-      ALLOWED_TAGS: [
-        "b", "strong", "i", "em", "u", "p", "br",
-        "div", "blockquote", "ul", "ol", "li"
-      ],
-      ALLOWED_ATTR: []
-    });
+    const safeContent =
+      DOMPurify.sanitize(
+        data.content || "",
+        {
+          ALLOWED_TAGS: [
+            "b",
+            "strong",
+            "i",
+            "em",
+            "u",
+            "p",
+            "br",
+            "div",
+            "blockquote",
+            "ul",
+            "ol",
+            "li"
+          ],
+
+          ALLOWED_ATTR: []
+        }
+      );
 
     entry.innerHTML = `
-      <div class="entry-meta">Posted: ${escapeHTML(formatDate(data.created_at))}</div>
-      <h1>${escapeHTML(data.title)}</h1>
-      <div class="anonymous">Anonymous</div>
+      <div class="entry-meta">
+        Posted: ${escapeHTML(
+          formatDate(
+            data.created_at
+          )
+        )}
+      </div>
+
+      <h1>
+        ${escapeHTML(
+          data.title
+        )}
+      </h1>
+
+      <div class="anonymous">
+        Anonymous
+      </div>
+
       <hr>
-      <div class="entry-content">${safeContent}</div>
-      <div class="entry-bottom">This entry is read-only.</div>
+
+      <div class="entry-content">
+        ${safeContent}
+      </div>
+
+      <div class="entry-bottom">
+        This entry is read-only.
+      </div>
     `;
   }
 
-  if (page === "home") loadFeed();
-  if (page === "write") setupEditor();
-  if (page === "journal") loadSingleEntry();
+  // =========================================================
+  // PAGE INITIALIZATION
+  // =========================================================
+
+  if (page === "home") {
+    loadFeed();
+  }
+
+  if (page === "write") {
+    setupEditor();
+  }
+
+  if (page === "journal") {
+    loadSingleEntry();
+  }
 })();
