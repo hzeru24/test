@@ -2,7 +2,7 @@
 
 
 /* =========================================================
-   RESET
+   GLOBAL
 ========================================================= */
 
 * {
@@ -10,14 +10,38 @@
 }
 
 html {
-  margin: 0;
-  padding: 0;
+  scroll-behavior: smooth;
 }
+
+:root {
+  --paper: #fffdf7;
+  --paper-dark: #f4eee2;
+
+  --ink: #292722;
+  --muted: #777268;
+
+  /* Journal title color */
+  --title-red: #b45f50;
+
+  --green: #536b52;
+  --green-dark: #3f543f;
+
+  --accent: #b46b52;
+
+  --line: #e3dacb;
+
+  --paper-line: rgba(110, 90, 60, 0.12);
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
 
 body {
   min-height: 100vh;
+
   margin: 0;
-  padding: 0;
 
   color: var(--ink);
 
@@ -41,30 +65,6 @@ body {
 
 
 /* =========================================================
-   COLORS
-========================================================= */
-
-:root {
-  --paper: #fffdf7;
-  --paper-dark: #f4eee2;
-
-  --ink: #292722;
-  --muted: #777268;
-
-  /* Same title color used by the individual journal page */
-  --title-red: #b45f50;
-
-  --green: #536b52;
-  --green-dark: #3f543f;
-
-  --accent: #b46b52;
-  --line: #e3dacb;
-
-  --paper-line: rgba(110, 90, 60, 0.12);
-}
-
-
-/* =========================================================
    HEADER
 ========================================================= */
 
@@ -72,10 +72,13 @@ body {
   width: min(1310px, calc(100% - 60px));
 
   margin: 0 auto;
+
   padding: 20px 0 45px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   gap: 30px;
@@ -83,18 +86,24 @@ body {
 
 
 /* =========================================================
-   SITE LOGO
+   WEBSITE LOGO
 ========================================================= */
 
 .brand {
   position: relative;
 
-  font-family: "Playfair Display", Georgia, serif;
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
 
-  font-size: clamp(42px, 5vw, 68px);
+  font-size:
+    clamp(42px, 5vw, 68px);
+
   font-weight: 700;
 
   line-height: 0.95;
+
   letter-spacing: -2px;
 
   color: var(--ink);
@@ -106,6 +115,7 @@ body {
   display: block;
 
   width: 86px;
+
   height: 3px;
 
   margin-top: 16px;
@@ -124,27 +134,35 @@ body {
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 10px;
 
   padding: 14px 25px;
 
-  border: 1px solid rgba(63, 84, 63, 0.3);
+  border: 1px solid
+    rgba(63, 84, 63, 0.3);
+
   border-radius: 50px;
 
   background: var(--green);
+
   color: #fff;
 
-  font-family: "DM Sans", sans-serif;
+  font-family:
+    "DM Sans",
+    sans-serif;
 
   font-size: 14px;
+
   font-weight: 700;
 
   text-decoration: none;
 
   box-shadow:
-    0 8px 20px rgba(63, 84, 63, 0.18);
+    0 8px 20px
+    rgba(63, 84, 63, 0.18);
 
   transition:
     transform 0.2s ease,
@@ -156,6 +174,7 @@ body {
   content: "+";
 
   font-size: 20px;
+
   line-height: 0;
 }
 
@@ -165,7 +184,8 @@ body {
   transform: translateY(-2px);
 
   box-shadow:
-    0 12px 25px rgba(63, 84, 63, 0.25);
+    0 12px 25px
+    rgba(63, 84, 63, 0.25);
 }
 
 
@@ -180,6 +200,11 @@ body {
 
   padding-bottom: 80px;
 }
+
+
+/* =========================================================
+   STATUS
+========================================================= */
 
 .status {
   min-height: 20px;
@@ -216,7 +241,10 @@ body {
 
   width: 100%;
 
-  padding: 48px 70px 50px;
+  padding:
+    60px
+    70px
+    55px;
 
   background:
     linear-gradient(
@@ -225,11 +253,15 @@ body {
     ),
     var(--paper);
 
-  border: 1px solid rgba(100, 85, 65, 0.12);
+  border:
+    1px solid
+    rgba(100, 85, 65, 0.12);
 
   box-shadow:
-    0 5px 10px rgba(65, 50, 30, 0.08),
-    0 20px 40px rgba(65, 50, 30, 0.12);
+    0 5px 10px
+    rgba(65, 50, 30, 0.08),
+    0 20px 40px
+    rgba(65, 50, 30, 0.12);
 
   text-align: center;
 
@@ -248,7 +280,7 @@ body {
 }
 
 
-/* Hover */
+/* Paper hover */
 
 .journal-card:hover {
   transform:
@@ -256,8 +288,10 @@ body {
     rotate(0deg);
 
   box-shadow:
-    0 8px 14px rgba(65, 50, 30, 0.10),
-    0 25px 50px rgba(65, 50, 30, 0.14);
+    0 8px 14px
+    rgba(65, 50, 30, 0.10),
+    0 25px 50px
+    rgba(65, 50, 30, 0.14);
 }
 
 
@@ -271,16 +305,19 @@ body {
   position: absolute;
 
   width: 115px;
+
   height: 30px;
 
   top: -14px;
+
   left: 50%;
 
   transform:
     translateX(-50%)
     rotate(-1deg);
 
-  background: rgba(206, 185, 145, 0.45);
+  background:
+    rgba(206, 185, 145, 0.45);
 
   pointer-events: none;
 }
@@ -288,33 +325,22 @@ body {
 
 /* =========================================================
    HOME JOURNAL TIMESTAMP
-=========================================================
-
-   IMPORTANT:
-   These classes match script.js exactly.
-
-   script.js creates:
-
-   <div class="posted">
-     date
-   </div>
-
 ========================================================= */
 
 .journal-card .posted {
-  display: block;
-
-  margin: 0 0 8px;
+  margin-bottom: 14px;
 
   color: var(--muted);
 
-  /* SAME FONT AS READ PAGE .entry-meta */
-  font-family: "Caveat", cursive;
+  font-family:
+    "Caveat",
+    cursive;
 
   font-size: 20px;
+
   font-weight: 500;
 
-  line-height: 1.2;
+  letter-spacing: 0.02em;
 
   text-align: center;
 }
@@ -322,40 +348,28 @@ body {
 
 /* =========================================================
    HOME JOURNAL TITLE
-=========================================================
-
-   IMPORTANT:
-   script.js creates:
-
-   <h2 class="journal-card-title">
-     title
-   </h2>
-
-   This now intentionally matches:
-
-   .full-entry h1
-
-   from the individual read page.
-
 ========================================================= */
 
 .journal-card .journal-card-title {
-  display: block;
+  margin:
+    0
+    0
+    8px;
 
-  margin: 0 0 8px;
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
 
-  /* SAME FONT AS READ PAGE TITLE */
-  font-family: "Playfair Display", Georgia, serif;
-
-  font-size: clamp(36px, 5vw, 52px);
+  font-size:
+    clamp(34px, 4vw, 48px);
 
   font-weight: 700;
 
   line-height: 1.05;
 
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 
-  /* SAME COLOR AS READ PAGE TITLE */
   color: var(--title-red);
 
   text-align: center;
@@ -363,29 +377,17 @@ body {
 
 
 /* =========================================================
-   HOME JOURNAL ANONYMOUS
-=========================================================
-
-   IMPORTANT:
-   script.js creates:
-
-   <div class="journal-card-anonymous">
-     Anonymous
-   </div>
-
-   This now matches the read page .anonymous styling.
-
+   HOME JOURNAL AUTHOR
 ========================================================= */
 
 .journal-card .journal-card-anonymous {
-  display: block;
-
-  margin: 0 0 28px;
+  margin-bottom: 24px;
 
   color: var(--muted);
 
-  /* SAME FONT AS READ PAGE */
-  font-family: "DM Sans", sans-serif;
+  font-family:
+    "DM Sans",
+    sans-serif;
 
   font-size: 13px;
 
@@ -395,62 +397,58 @@ body {
 
   text-transform: uppercase;
 
-  line-height: 1.2;
-
   text-align: center;
 }
 
 
 /* =========================================================
    HOME JOURNAL PREVIEW
-=========================================================
-
-   script.js creates:
-
-   <p class="journal-card-preview">
-     ...
-   </p>
-
 ========================================================= */
 
 .journal-card .journal-card-preview {
   width: min(950px, 100%);
 
-  margin: 0 auto;
+  margin:
+    0
+    auto;
 
   color: #413d37;
 
-  font-family: "DM Sans", sans-serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: 16px;
+  font-size: 18px;
 
   font-weight: 400;
 
   line-height: 1.7;
 
   text-align: center;
-
-  overflow-wrap: anywhere;
 }
 
 
 /* =========================================================
-   HOME READ JOURNAL BUTTON
+   READ JOURNAL BUTTON
 ========================================================= */
 
-.journal-card .read-button {
+.read-button {
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 8px;
 
-  margin-top: 27px;
+  margin-top: 30px;
 
   padding: 11px 20px;
 
-  border: 1px solid var(--line);
+  border:
+    1px solid
+    var(--line);
 
   border-radius: 30px;
 
@@ -458,7 +456,9 @@ body {
 
   color: var(--ink);
 
-  font-family: "DM Sans", sans-serif;
+  font-family:
+    "DM Sans",
+    sans-serif;
 
   font-size: 13px;
 
@@ -474,18 +474,131 @@ body {
     transform 0.2s ease;
 }
 
-.journal-card .read-button::after {
+.read-button::after {
   content: "→";
 
   font-size: 17px;
 }
 
-.journal-card .read-button:hover {
+.read-button:hover {
   background: var(--ink);
 
   color: white;
 
-  transform: translateX(3px);
+  transform:
+    translateX(3px);
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.pagination {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 55px;
+
+  padding-bottom: 20px;
+}
+
+
+/* =========================================================
+   PAGINATION BUTTON
+========================================================= */
+
+.pagination-button {
+  min-width: 42px;
+
+  height: 42px;
+
+  padding:
+    0
+    12px;
+
+  border:
+    1px solid
+    var(--line);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 253, 247, 0.85);
+
+  color: var(--ink);
+
+  font-family:
+    "DM Sans",
+    sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* Page hover */
+
+.pagination-button:hover:not(:disabled) {
+  background: var(--ink);
+
+  color: white;
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 5px 12px
+    rgba(65, 50, 30, 0.12);
+}
+
+
+/* Current page */
+
+.pagination-button.active {
+  background: var(--green);
+
+  border-color: var(--green);
+
+  color: white;
+
+  box-shadow:
+    0 5px 12px
+    rgba(63, 84, 63, 0.18);
+}
+
+
+/* Previous / next */
+
+.pagination-button.pagination-arrow {
+  font-size: 18px;
+}
+
+
+/* Disabled */
+
+.pagination-button:disabled {
+  opacity: 0.35;
+
+  cursor: default;
+
+  transform: none;
+
+  box-shadow: none;
 }
 
 
@@ -500,6 +613,7 @@ body {
 
   background: #000;
 }
+
 
 .editor-toolbar {
   min-height: 48px;
@@ -519,6 +633,7 @@ body {
   color: #fff;
 }
 
+
 .back-link {
   color: #fff;
 
@@ -531,6 +646,7 @@ body {
   margin-right: 8px;
 }
 
+
 .back-link.dark {
   color: var(--ink);
 
@@ -539,28 +655,35 @@ body {
   margin-bottom: 14px;
 }
 
+
 .toolbar-group {
   display: flex;
 
   gap: 2px;
 }
 
+
 .toolbar-group button {
   width: 34px;
+
   height: 32px;
 
   background: #161616;
 
   color: #fff;
 
-  border: 1px solid #6d6d6d;
+  border:
+    1px solid
+    #6d6d6d;
 
   cursor: pointer;
 }
 
+
 .toolbar-group button:hover {
   background: #555;
 }
+
 
 .title-field {
   height: 32px;
@@ -579,8 +702,11 @@ body {
 
   background: #161616;
 
-  border: 1px solid #6d6d6d;
+  border:
+    1px solid
+    #6d6d6d;
 }
+
 
 .title-field span {
   font-size: 13px;
@@ -589,6 +715,7 @@ body {
 
   color: #aaa;
 }
+
 
 .title-field input {
   flex: 1;
@@ -606,6 +733,7 @@ body {
   font-size: 15px;
 }
 
+
 .post-button {
   min-width: 190px;
 
@@ -622,9 +750,11 @@ body {
   cursor: pointer;
 }
 
+
 .post-button:hover {
   filter: brightness(1.08);
 }
+
 
 .post-button:disabled {
   opacity: 0.5;
@@ -641,14 +771,17 @@ body {
   padding: 4px;
 }
 
+
 .paper {
-  min-height: calc(100vh - 80px);
+  min-height:
+    calc(100vh - 80px);
 
   padding: 28px 24px;
 
   outline: none;
 
-  background-color: var(--paper);
+  background-color:
+    var(--paper);
 
   background-image:
     repeating-linear-gradient(
@@ -661,20 +794,26 @@ body {
 
   border: 3px solid #000;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
   font-size: 18px;
 
   line-height: 22px;
 }
 
+
 .paper:empty::before {
   content: attr(data-placeholder);
 
-  color: rgba(70, 45, 25, 0.55);
+  color:
+    rgba(70, 45, 25, 0.55);
 
   pointer-events: none;
 }
+
 
 .editor-footer {
   display: flex;
@@ -688,9 +827,11 @@ body {
   font-size: 13px;
 }
 
+
 .limit-warning {
   color: #ff5555;
 }
+
 
 .write-status {
   min-height: 20px;
@@ -706,15 +847,20 @@ body {
 ========================================================= */
 
 .entry-page {
-  width: min(1120px, calc(100% - 60px));
+  width:
+    min(
+      1120px,
+      calc(100% - 60px)
+    );
 
   margin: 0 auto;
 
-  padding: 0 0 80px;
+  padding:
+    0
+    0
+    80px;
 }
 
-
-/* Back link */
 
 .entry-page > .back-link {
   margin-bottom: 20px;
@@ -730,7 +876,10 @@ body {
 
   width: 100%;
 
-  padding: 55px 75px 70px;
+  padding:
+    55px
+    75px
+    70px;
 
   background:
     linear-gradient(
@@ -739,11 +888,15 @@ body {
     ),
     var(--paper);
 
-  border: 1px solid rgba(100, 85, 65, 0.12);
+  border:
+    1px solid
+    rgba(100, 85, 65, 0.12);
 
   box-shadow:
-    0 5px 10px rgba(65, 50, 30, 0.08),
-    0 20px 40px rgba(65, 50, 30, 0.12);
+    0 5px 10px
+    rgba(65, 50, 30, 0.08),
+    0 20px 40px
+    rgba(65, 50, 30, 0.12);
 
   text-align: center;
 }
@@ -759,16 +912,19 @@ body {
   position: absolute;
 
   width: 115px;
+
   height: 30px;
 
   top: -14px;
+
   left: 50%;
 
   transform:
     translateX(-50%)
     rotate(-1deg);
 
-  background: rgba(206, 185, 145, 0.45);
+  background:
+    rgba(206, 185, 145, 0.45);
 
   pointer-events: none;
 }
@@ -783,7 +939,9 @@ body {
 
   color: var(--muted);
 
-  font-family: "Caveat", cursive;
+  font-family:
+    "Caveat",
+    cursive;
 
   font-size: 20px;
 
@@ -798,11 +956,18 @@ body {
 ========================================================= */
 
 .full-entry h1 {
-  margin: 0 0 8px;
+  margin:
+    0
+    0
+    8px;
 
-  font-family: "Playfair Display", Georgia, serif;
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
 
-  font-size: clamp(42px, 6vw, 64px);
+  font-size:
+    clamp(42px, 6vw, 64px);
 
   font-weight: 700;
 
@@ -825,7 +990,9 @@ body {
 
   color: var(--muted);
 
-  font-family: "DM Sans", sans-serif;
+  font-family:
+    "DM Sans",
+    sans-serif;
 
   font-size: 13px;
 
@@ -846,11 +1013,16 @@ body {
 .full-entry hr {
   width: 92%;
 
-  margin: 0 auto 38px;
+  margin:
+    0
+    auto
+    38px;
 
   border: 0;
 
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid
+    var(--line);
 }
 
 
@@ -865,7 +1037,10 @@ body {
 
   color: #413d37;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
   font-size: 20px;
 
@@ -876,13 +1051,19 @@ body {
   overflow-wrap: anywhere;
 }
 
+
 .entry-content p {
   margin-bottom: 18px;
 }
 
+
 .entry-content ul,
 .entry-content ol {
-  margin: 0 0 18px 30px;
+  margin:
+    0
+    0
+    18px
+    30px;
 }
 
 
@@ -895,7 +1076,9 @@ body {
 
   padding-top: 18px;
 
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid
+    var(--line);
 
   color: var(--muted);
 
@@ -913,10 +1096,9 @@ body {
 
 @media (max-width: 800px) {
 
-  /* HEADER */
-
   .site-header {
-    width: calc(100% - 30px);
+    width:
+      calc(100% - 30px);
 
     padding-top: 20px;
 
@@ -929,65 +1111,84 @@ body {
     gap: 25px;
   }
 
+
   .brand {
     font-size: 46px;
 
     letter-spacing: -1.5px;
   }
 
+
   .header-button {
-    padding: 12px 20px;
+    padding:
+      12px
+      20px;
   }
 
-
-  /* HOME */
 
   .feed-page {
-    width: calc(100% - 24px);
+    width:
+      calc(100% - 24px);
   }
+
 
   .journal-list {
     gap: 35px;
   }
 
+
   .journal-card {
-    padding: 42px 24px 45px;
+    padding:
+      45px
+      24px
+      45px;
   }
 
-  .journal-card .posted {
-    font-size: 19px;
-  }
 
   .journal-card .journal-card-title {
-    font-size: 36px;
+    font-size: 34px;
   }
 
-  .journal-card .journal-card-anonymous {
-    font-size: 12px;
-
-    margin-bottom: 22px;
-  }
 
   .journal-card .journal-card-preview {
-    font-size: 15px;
-
-    line-height: 1.65;
+    font-size: 16px;
   }
 
 
-  /* READ PAGE */
+  .pagination {
+    gap: 6px;
+
+    margin-top: 45px;
+  }
+
+
+  .pagination-button {
+    min-width: 38px;
+
+    height: 38px;
+
+    font-size: 12px;
+  }
+
 
   .entry-page {
-    width: calc(100% - 24px);
+    width:
+      calc(100% - 24px);
   }
 
+
   .full-entry {
-    padding: 45px 25px 55px;
+    padding:
+      45px
+      25px
+      55px;
   }
+
 
   .full-entry h1 {
     font-size: 44px;
   }
+
 
   .entry-content {
     font-size: 18px;
@@ -996,15 +1197,15 @@ body {
   }
 
 
-  /* WRITER */
-
   .editor-toolbar {
     flex-wrap: wrap;
   }
 
+
   .back-link {
     width: 100%;
   }
+
 
   .title-field {
     order: 5;
@@ -1014,14 +1215,17 @@ body {
     flex-basis: 100%;
   }
 
+
   .post-button {
     order: 6;
 
     width: 100%;
   }
 
+
   .paper {
-    min-height: calc(100vh - 150px);
+    min-height:
+      calc(100vh - 150px);
   }
 }
 
@@ -1037,40 +1241,55 @@ body {
   }
 
 
-  /* HOME */
-
   .journal-card {
-    padding: 38px 18px 40px;
+    padding:
+      40px
+      18px
+      40px;
   }
+
+
+  .journal-card .journal-card-title {
+    font-size: 30px;
+  }
+
+
+  .journal-card .journal-card-preview {
+    font-size: 15px;
+  }
+
 
   .journal-card .posted {
     font-size: 18px;
   }
 
-  .journal-card .journal-card-title {
-    font-size: 32px;
-  }
-
-  .journal-card .journal-card-preview {
-    font-size: 14px;
-  }
-
-
-  /* READ PAGE */
 
   .full-entry {
-    padding: 40px 20px 45px;
+    padding:
+      40px
+      20px
+      45px;
   }
+
 
   .full-entry h1 {
     font-size: 38px;
   }
 
+
   .entry-meta {
     font-size: 18px;
   }
 
+
   .entry-content {
     font-size: 17px;
+  }
+
+
+  .pagination-button {
+    min-width: 36px;
+
+    height: 36px;
   }
 }
