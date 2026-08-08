@@ -1,79 +1,91 @@
-/* =========================================================
-   GOOGLE FONTS
-========================================================= */
-
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 
 /* =========================================================
-   GLOBAL RESET
+   GLOBAL
 ========================================================= */
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
 
 :root {
-  --paper: #fffdf7;
-  --paper-dark: #f4eee2;
+    --paper: #fffdf7;
+    --paper-dark: #f4eee2;
+    --ink: #292722;
+    --muted: #777268;
 
-  --ink: #292722;
-  --muted: #777268;
+    --green: #536b52;
+    --green-dark: #3f543f;
 
-  --green: #536b52;
-  --green-dark: #3f543f;
+    --accent: #a95745;
+    --accent-dark: #8e4032;
 
-  --accent: #b46b52;
+    --line: #e3dacb;
+    --background: #e9e1d3;
+}
 
-  --line: #e3dacb;
 
-  --background: #e9e1d3;
+body {
+    min-height: 100vh;
+
+    font-family: "DM Sans", Arial, sans-serif;
+
+    color: var(--ink);
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.7),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(190,170,140,.15),
+            transparent 35%
+        ),
+        var(--background);
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.25) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.18) 1px,
+            transparent 1px
+        );
+
+    background-size: 28px 28px;
 }
 
 
 /* =========================================================
-   BODY
+   MAIN PAGE
 ========================================================= */
 
-body {
-  min-height: 100vh;
+.feed-page {
+    width: min(1100px, calc(100% - 40px));
 
-  color: var(--ink);
+    margin: 0 auto;
 
-  font-family: "DM Sans", sans-serif;
+    padding: 45px 0 80px;
+}
 
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(255,255,255,.7),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 80% 70%,
-      rgba(190,170,140,.15),
-      transparent 35%
-    ),
-    var(--background);
 
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,.25) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.18) 1px,
-      transparent 1px
-    );
+.status {
+    text-align: center;
 
-  background-size: 28px 28px;
+    color: var(--muted);
+
+    font-size: 14px;
+
+    min-height: 20px;
+
+    margin-bottom: 25px;
 }
 
 
@@ -82,150 +94,115 @@ body {
 ========================================================= */
 
 .site-header {
-  width: min(1100px, calc(100% - 32px));
+    width: min(1100px, calc(100% - 40px));
 
-  margin: 0 auto;
-  padding: 45px 0 25px;
+    margin: 0 auto;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    padding-top: 45px;
 
-  gap: 25px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 55px;
 }
 
 
-/* =========================================================
-   LOGO / BRAND
-========================================================= */
+/* ---------- LOGO ---------- */
 
 .brand {
-  position: relative;
+    position: relative;
 
-  font-family: "Playfair Display", serif;
+    font-family: "Playfair Display", Georgia, serif;
 
-  font-size: clamp(42px, 6vw, 68px);
+    font-size: clamp(42px, 6vw, 68px);
 
-  font-weight: 700;
+    font-weight: 700;
 
-  line-height: .95;
+    line-height: .95;
 
-  letter-spacing: -2px;
+    letter-spacing: -2px;
 
-  color: var(--ink);
+    color: var(--ink);
 }
 
-
-/* Decorative line below logo */
 
 .brand::after {
-  content: "";
+    content: "";
 
-  display: block;
+    display: block;
 
-  width: 75px;
-  height: 3px;
+    width: 75px;
 
-  margin-top: 12px;
+    height: 3px;
 
-  background: var(--accent);
+    margin-top: 12px;
 
-  border-radius: 10px;
+    background: var(--accent);
+
+    border-radius: 10px;
 }
 
 
-/* =========================================================
-   WRITE ENTRY BUTTON
-========================================================= */
+/* ---------- WRITE BUTTON ---------- */
 
 .header-button {
-  display: inline-flex;
+    display: inline-flex;
 
-  align-items: center;
-  justify-content: center;
+    align-items: center;
 
-  gap: 10px;
+    gap: 10px;
 
-  padding: 14px 23px;
+    padding: 14px 23px;
 
-  border: 1px solid rgba(63,84,63,.3);
+    border: 1px solid rgba(63,84,63,.3);
 
-  border-radius: 50px;
+    border-radius: 50px;
 
-  background: var(--green);
+    background: var(--green);
 
-  color: white;
+    color: white;
 
-  font-family: "DM Sans", sans-serif;
+    font-family: "DM Sans", sans-serif;
 
-  font-size: 14px;
+    font-size: 14px;
 
-  font-weight: 700;
+    font-weight: 700;
 
-  text-decoration: none;
+    text-decoration: none;
 
-  box-shadow:
-    0 8px 20px rgba(63,84,63,.18);
+    white-space: nowrap;
 
-  transition:
-    transform .2s ease,
-    background .2s ease,
-    box-shadow .2s ease;
+    box-shadow:
+        0 8px 20px rgba(63,84,63,.18);
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
 }
 
-
-/* Plus symbol */
 
 .header-button::before {
-  content: "+";
+    content: "+";
 
-  font-size: 20px;
+    font-size: 20px;
 
-  line-height: 0;
+    line-height: 0;
 }
 
-
-/* Button hover */
 
 .header-button:hover {
-  background: var(--green-dark);
+    background: var(--green-dark);
 
-  transform: translateY(-2px);
+    transform: translateY(-2px);
 
-  box-shadow:
-    0 12px 25px rgba(63,84,63,.25);
-}
-
-
-/* =========================================================
-   HOME PAGE
-========================================================= */
-
-.feed-page {
-  width: min(1100px, calc(100% - 32px));
-
-  margin: 0 auto;
-
-  padding: 25px 0 80px;
-}
-
-
-/* =========================================================
-   STATUS MESSAGE
-========================================================= */
-
-.status {
-  min-height: 0;
-
-  padding: 5px 0 20px;
-
-  color: var(--ink);
-
-  font-size: 14px;
-
-  font-weight: 600;
-
-  text-align: center;
+    box-shadow:
+        0 12px 25px rgba(63,84,63,.25);
 }
 
 
@@ -234,11 +211,11 @@ body {
 ========================================================= */
 
 .journal-list {
-  display: flex;
+    display: flex;
 
-  flex-direction: column;
+    flex-direction: column;
 
-  gap: 38px;
+    gap: 38px;
 }
 
 
@@ -246,53 +223,71 @@ body {
    JOURNAL PAPER
 ========================================================= */
 
+/*
+   IMPORTANT:
+
+   These class names match the HTML generated by script.js:
+
+   .journal-card
+   .journal-card-main
+   .journal-card-side
+   .posted
+   .read-button
+*/
+
+
 .journal-card {
-  position: relative;
+    position: relative;
 
-  width: 100%;
+    width: 100%;
 
-  padding: 42px 55px 38px;
+    padding: 42px 50px 40px;
 
-  background:
-    linear-gradient(
-      rgba(255,255,255,.72),
-      rgba(255,255,255,.72)
-    ),
-    var(--paper);
+    background:
+        linear-gradient(
+            rgba(255,255,255,.72),
+            rgba(255,255,255,.72)
+        ),
+        var(--paper);
 
-  border: 1px solid rgba(100,85,65,.15);
+    border: 1px solid rgba(100,85,65,.15);
 
-  box-shadow:
-    0 5px 9px rgba(65,50,30,.08),
-    0 18px 38px rgba(65,50,30,.10);
+    box-shadow:
+        0 5px 8px rgba(65,50,30,.08),
+        0 18px 40px rgba(65,50,30,.10);
 
-  text-align: center;
+    text-align: center;
 
-  transform: rotate(-.25deg);
+    transform: rotate(-.25deg);
 
-  transition:
-    transform .25s ease,
-    box-shadow .25s ease;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
 }
 
 
-/* Alternate paper rotation */
+/* Alternate paper angle */
 
 .journal-card:nth-child(even) {
-  transform: rotate(.3deg);
+    transform: rotate(.3deg);
 }
 
 
-/* Paper hover */
+.journal-card:nth-child(3n) {
+    transform: rotate(-.15deg);
+}
+
+
+/* Hover */
 
 .journal-card:hover {
-  transform:
-    translateY(-5px)
-    rotate(0deg);
+    transform:
+        translateY(-5px)
+        rotate(0deg);
 
-  box-shadow:
-    0 9px 14px rgba(65,50,30,.10),
-    0 25px 48px rgba(65,50,30,.14);
+    box-shadow:
+        0 8px 12px rgba(65,50,30,.10),
+        0 25px 50px rgba(65,50,30,.14);
 }
 
 
@@ -301,26 +296,28 @@ body {
 ========================================================= */
 
 .journal-card::before {
-  content: "";
+    content: "";
 
-  position: absolute;
+    position: absolute;
 
-  width: 110px;
-  height: 27px;
+    width: 115px;
 
-  top: -13px;
-  left: 50%;
+    height: 27px;
 
-  transform:
-    translateX(-50%)
-    rotate(-2deg);
+    top: -13px;
 
-  background: rgba(206,185,145,.45);
+    left: 50%;
 
-  box-shadow:
-    0 1px 2px rgba(80,60,35,.05);
+    transform:
+        translateX(-50%)
+        rotate(-1deg);
 
-  pointer-events: none;
+    background: rgba(206,185,145,.42);
+
+    box-shadow:
+        0 1px 3px rgba(100,80,50,.05);
+
+    pointer-events: none;
 }
 
 
@@ -328,86 +325,120 @@ body {
    JOURNAL CONTENT
 ========================================================= */
 
-.journal-card-content {
-  display: flex;
+/*
+   We use display: contents on the side container.
 
-  flex-direction: column;
+   This lets the timestamp and READ JOURNAL button
+   participate directly in the paper's centered layout.
 
-  align-items: center;
+   This is what fixes the desktop ordering.
+*/
+
+.journal-card-side {
+    display: contents;
 }
 
 
 /* =========================================================
-   JOURNAL TIMESTAMP
+   TIMESTAMP
 ========================================================= */
 
-.journal-card .posted {
-  margin-bottom: 17px;
+.posted {
+    order: 1;
 
-  color: var(--muted);
+    width: 100%;
 
-  font-size: 13px;
+    text-align: center;
 
-  font-weight: 600;
+    color: var(--muted);
 
-  letter-spacing: .04em;
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: .05em;
+
+    margin-bottom: 16px;
 }
 
 
 /* =========================================================
-   JOURNAL TITLE
+   TITLE + JOURNAL PREVIEW
 ========================================================= */
 
-.journal-card-title {
-  margin: 0 0 9px;
+.journal-card-main {
+    order: 2;
 
-  font-family: "Playfair Display", serif;
+    width: 100%;
 
-  font-size: clamp(28px, 4vw, 38px);
+    display: flex;
 
-  line-height: 1.15;
+    flex-direction: column;
 
-  color: var(--accent);
-
-  font-weight: 700;
+    align-items: center;
 }
 
 
-/* =========================================================
-   ANONYMOUS LABEL
-========================================================= */
+/* ---------- TITLE ---------- */
 
-.journal-card-anonymous {
-  margin-bottom: 17px;
+.journal-card-main h2 {
+    margin: 0 0 10px;
 
-  color: var(--muted);
+    max-width: 900px;
 
-  font-family: "DM Sans", sans-serif;
+    font-family: "Playfair Display", Georgia, serif;
 
-  font-size: 13px;
+    font-size: clamp(28px, 3.5vw, 40px);
 
-  font-weight: 500;
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: var(--accent);
+
+    text-align: center;
 }
 
 
-/* =========================================================
-   JOURNAL PREVIEW
-========================================================= */
+/* ---------- ANONYMOUS ---------- */
 
-.journal-card-preview {
-  width: min(780px, 100%);
+.journal-card-main h2 span {
+    display: block;
 
-  margin: 0 auto;
+    margin-top: 8px;
 
-  color: #5f5a51;
+    font-family: "DM Sans", Arial, sans-serif;
 
-  font-family: "DM Sans", sans-serif;
+    font-size: 13px;
 
-  font-size: 15px;
+    font-weight: 500;
 
-  line-height: 1.75;
+    letter-spacing: .04em;
 
-  text-align: center;
+    color: var(--muted);
+}
+
+
+/* ---------- JOURNAL PREVIEW ---------- */
+
+.journal-card-main p {
+    width: min(800px, 100%);
+
+    margin: 0 auto;
+
+    color: #5f5a51;
+
+    font-family: "DM Sans", Arial, sans-serif;
+
+    font-size: 16px;
+
+    line-height: 1.75;
+
+    text-align: center;
+
+    font-weight: 400;
+
+    overflow-wrap: anywhere;
 }
 
 
@@ -415,338 +446,293 @@ body {
    READ JOURNAL BUTTON
 ========================================================= */
 
-.journal-card .read-button {
-  display: inline-flex;
+.read-button {
+    order: 3;
 
-  align-items: center;
-  justify-content: center;
+    justify-self: center;
 
-  gap: 8px;
+    display: inline-flex;
 
-  margin-top: 25px;
+    align-items: center;
 
-  padding: 10px 18px;
+    justify-content: center;
 
-  border: 1px solid var(--line);
+    gap: 8px;
 
-  border-radius: 30px;
+    margin: 28px auto 0;
 
-  background: transparent;
+    padding: 11px 20px;
 
-  color: var(--ink);
+    border: 1px solid var(--line);
 
-  font-family: "DM Sans", sans-serif;
+    border-radius: 30px;
 
-  font-size: 13px;
+    background: rgba(255,255,255,.45);
 
-  font-weight: 700;
+    color: var(--ink);
 
-  text-decoration: none;
+    font-family: "DM Sans", Arial, sans-serif;
 
-  cursor: pointer;
+    font-size: 13px;
 
-  transition:
-    background .2s ease,
-    color .2s ease,
-    transform .2s ease;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 
-/* Arrow */
+.read-button::after {
+    content: "→";
 
-.journal-card .read-button::after {
-  content: "→";
-
-  font-size: 17px;
+    font-size: 17px;
 }
 
 
-/* Read button hover */
+.read-button:hover {
+    background: var(--ink);
 
-.journal-card .read-button:hover {
-  background: var(--ink);
+    color: white;
 
-  color: white;
+    transform: translateX(3px);
 
-  transform: translateX(3px);
+    box-shadow:
+        0 5px 12px rgba(40,35,30,.15);
 }
 
 
 /* =========================================================
-   WRITING PAGE
+   WRITER PAGE
 ========================================================= */
 
 .editor-shell {
-  min-height: 100vh;
+    min-height: 100vh;
 
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(255,255,255,.7),
-      transparent 30%
-    ),
-    #e9e1d3;
+    background: var(--background);
 
-  padding: 20px;
+    padding: 20px;
 }
 
-
-/* =========================================================
-   EDITOR TOOLBAR
-========================================================= */
 
 .editor-toolbar {
-  min-height: 48px;
+    min-height: 48px;
 
-  background: #292722;
+    background: #303030;
 
-  border: 1px solid #181714;
+    border: 1px solid #222;
 
-  display: flex;
+    display: flex;
 
-  align-items: center;
+    align-items: center;
 
-  gap: 6px;
+    gap: 6px;
 
-  padding: 6px 8px;
+    padding: 6px;
 
-  color: #fff;
-
-  border-radius: 6px 6px 0 0;
+    color: #fff;
 }
 
-
-/* =========================================================
-   BACK LINK
-========================================================= */
 
 .back-link {
-  color: #fff;
+    color: #fff;
 
-  text-decoration: none;
+    text-decoration: none;
 
-  font-weight: 700;
+    font-weight: 700;
 
-  white-space: nowrap;
+    white-space: nowrap;
 
-  margin-right: 8px;
-}
-
-
-.back-link:hover {
-  opacity: .75;
+    margin-right: 8px;
 }
 
 
 .back-link.dark {
-  color: var(--ink);
+    color: var(--ink);
 
-  display: inline-block;
+    display: inline-block;
 
-  margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 
-/* =========================================================
-   TOOLBAR BUTTONS
-========================================================= */
-
 .toolbar-group {
-  display: flex;
+    display: flex;
 
-  gap: 2px;
+    gap: 2px;
 }
 
 
 .toolbar-group button {
-  width: 34px;
+    width: 34px;
 
-  height: 32px;
+    height: 32px;
 
-  background: #161616;
+    background: #161616;
 
-  color: #fff;
+    color: #fff;
 
-  border: 1px solid #6d6d6d;
+    border: 1px solid #6d6d6d;
 
-  cursor: pointer;
-
-  border-radius: 3px;
+    cursor: pointer;
 }
 
 
 .toolbar-group button:hover {
-  background: #555;
+    background: #555;
 }
 
 
-/* =========================================================
-   TITLE FIELD
-========================================================= */
-
 .title-field {
-  height: 32px;
+    height: 32px;
 
-  flex: 1;
+    flex: 1;
 
-  min-width: 180px;
+    min-width: 180px;
 
-  background: #161616;
+    background: #161616;
 
-  border: 1px solid #6d6d6d;
+    border: 1px solid #6d6d6d;
 
-  display: flex;
+    display: flex;
 
-  align-items: center;
+    align-items: center;
 
-  padding: 0 8px;
+    padding: 0 8px;
 
-  gap: 8px;
-
-  border-radius: 3px;
+    gap: 8px;
 }
 
 
 .title-field span {
-  font-size: 13px;
+    font-size: 13px;
 
-  font-weight: 900;
+    font-weight: 900;
 
-  color: #aaa;
+    color: #aaa;
 }
 
 
 .title-field input {
-  flex: 1;
+    flex: 1;
 
-  min-width: 0;
+    min-width: 0;
 
-  background: transparent;
+    background: transparent;
 
-  border: 0;
+    border: 0;
 
-  outline: 0;
+    outline: 0;
 
-  color: #fff;
+    color: #fff;
 
-  font-size: 15px;
+    font-size: 15px;
 }
 
-
-/* =========================================================
-   POST BUTTON
-========================================================= */
 
 .post-button {
-  background: var(--green);
+    background: var(--red, #a40019);
 
-  color: #fff;
+    color: #fff;
 
-  padding: 7px 25px;
+    padding: 7px 25px;
 
-  min-width: 190px;
+    min-width: 190px;
 
-  border: 0;
+    border: 0;
 
-  border-radius: 4px;
+    font-weight: 700;
 
-  font-weight: 700;
-
-  cursor: pointer;
-}
-
-
-.post-button:hover {
-  background: var(--green-dark);
+    cursor: pointer;
 }
 
 
 .post-button:disabled {
-  opacity: 0.5;
+    opacity: .5;
 
-  cursor: wait;
+    cursor: wait;
 }
 
 
 /* =========================================================
-   PAPER EDITOR
+   WRITING PAPER
 ========================================================= */
 
 .paper-wrap {
-  padding: 0;
+    padding: 4px;
 }
 
 
 .paper {
-  min-height: calc(100vh - 150px);
+    min-height: calc(100vh - 80px);
 
-  padding: 35px 40px;
+    padding: 28px 24px;
 
-  outline: none;
+    outline: none;
 
-  background-color: var(--paper);
+    background-color: var(--paper);
 
-  background-image:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 25px,
-      rgba(92,62,32,.20) 26px,
-      transparent 27px
-    );
+    background-image:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 20px,
+            rgba(92,62,32,.20) 21px,
+            transparent 22px
+        );
 
-  border: 1px solid rgba(100,85,65,.15);
+    border: 1px solid rgba(100,85,65,.15);
 
-  font-family: Georgia, "Times New Roman", serif;
+    box-shadow:
+        0 8px 25px rgba(65,50,30,.10);
 
-  font-size: 18px;
+    font-family: Georgia, "Times New Roman", serif;
 
-  line-height: 27px;
+    font-size: 18px;
 
-  box-shadow:
-    0 10px 30px rgba(65,50,30,.12);
+    line-height: 22px;
 }
 
 
 .paper:empty::before {
-  content: attr(data-placeholder);
+    content: attr(data-placeholder);
 
-  color: rgba(70,45,25,.55);
+    color: rgba(70,45,25,.55);
 
-  pointer-events: none;
+    pointer-events: none;
 }
 
 
-/* =========================================================
-   EDITOR FOOTER
-========================================================= */
-
 .editor-footer {
-  display: flex;
+    display: flex;
 
-  justify-content: space-between;
+    justify-content: space-between;
 
-  color: var(--ink);
+    color: var(--muted);
 
-  padding: 10px 5px;
+    padding: 7px 5px;
 
-  font-size: 13px;
+    font-size: 13px;
 }
 
 
 .limit-warning {
-  color: #b54b3c;
+    color: #b43d3d;
 }
 
 
 .write-status {
-  color: var(--ink);
+    color: var(--muted);
 
-  text-align: center;
+    text-align: center;
 
-  min-height: 20px;
-
-  padding-top: 8px;
+    min-height: 20px;
 }
 
 
@@ -755,379 +741,338 @@ body {
 ========================================================= */
 
 .entry-page {
-  width: min(1000px, calc(100% - 32px));
+    width: min(1000px, calc(100% - 40px));
 
-  margin: 35px auto;
+    margin: 0 auto;
 
-  padding: 0 0 70px;
+    padding: 45px 0 80px;
 }
 
 
-/* =========================================================
-   FULL JOURNAL PAPER
-========================================================= */
+/* ---------- BACK LINK ---------- */
+
+.entry-page .back-link {
+    color: var(--ink);
+
+    display: inline-block;
+
+    margin-bottom: 25px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+.entry-page .back-link:hover {
+    color: var(--accent);
+}
+
+
+/* ---------- FULL PAPER ---------- */
 
 .full-entry {
-  position: relative;
+    position: relative;
 
-  background:
-    linear-gradient(
-      rgba(255,255,255,.72),
-      rgba(255,255,255,.72)
-    ),
-    var(--paper);
+    padding: 55px 70px 60px;
 
-  border: 1px solid rgba(100,85,65,.15);
+    background:
+        linear-gradient(
+            rgba(255,255,255,.72),
+            rgba(255,255,255,.72)
+        ),
+        var(--paper);
 
-  padding: 50px 65px;
+    border: 1px solid rgba(100,85,65,.15);
 
-  text-align: center;
+    box-shadow:
+        0 5px 8px rgba(65,50,30,.08),
+        0 18px 40px rgba(65,50,30,.10);
 
-  box-shadow:
-    0 5px 9px rgba(65,50,30,.08),
-    0 18px 38px rgba(65,50,30,.10);
-
-  transform: rotate(-.2deg);
+    text-align: center;
 }
 
 
-/* Tape */
+/* ---------- TAPE ---------- */
 
 .full-entry::before {
-  content: "";
+    content: "";
 
-  position: absolute;
+    position: absolute;
 
-  width: 110px;
-  height: 27px;
+    width: 115px;
 
-  top: -13px;
-  left: 50%;
+    height: 27px;
 
-  transform:
-    translateX(-50%)
-    rotate(-2deg);
+    top: -13px;
 
-  background: rgba(206,185,145,.45);
+    left: 50%;
 
-  pointer-events: none;
+    transform: translateX(-50%) rotate(-1deg);
+
+    background: rgba(206,185,145,.42);
 }
 
 
-/* =========================================================
-   INDIVIDUAL ENTRY TIMESTAMP
-========================================================= */
+/* ---------- DATE ---------- */
 
 .entry-meta {
-  margin-bottom: 20px;
+    text-align: center;
 
-  color: var(--muted);
+    color: var(--muted);
 
-  font-size: 13px;
+    font-size: 13px;
 
-  font-weight: 600;
+    font-weight: 600;
 
-  letter-spacing: .04em;
+    letter-spacing: .05em;
+
+    margin-bottom: 18px;
 }
 
 
-/* =========================================================
-   INDIVIDUAL ENTRY TITLE
-========================================================= */
+/* ---------- TITLE ---------- */
 
 .full-entry h1 {
-  margin: 0 0 10px;
+    margin: 0 0 10px;
 
-  font-family: "Playfair Display", serif;
+    font-family: "Playfair Display", Georgia, serif;
 
-  font-size: clamp(32px, 5vw, 52px);
+    font-size: clamp(32px, 5vw, 52px);
 
-  line-height: 1.15;
+    line-height: 1.15;
 
-  color: var(--accent);
+    color: var(--accent);
 
-  font-weight: 700;
+    text-align: center;
 }
 
 
-/* =========================================================
-   INDIVIDUAL ENTRY ANONYMOUS
-========================================================= */
+/* ---------- ANONYMOUS ---------- */
 
 .anonymous {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 
-  color: var(--muted);
+    font-size: 13px;
 
-  font-size: 13px;
+    font-weight: 500;
 
-  font-weight: 500;
+    color: var(--muted);
+
+    letter-spacing: .04em;
 }
 
 
-/* =========================================================
-   ENTRY DIVIDER
-========================================================= */
+/* ---------- DIVIDER ---------- */
 
 .full-entry hr {
-  width: 80px;
+    border: 0;
 
-  border: 0;
+    border-top: 1px solid var(--line);
 
-  border-top: 2px solid var(--line);
+    margin: 0 auto 28px;
 
-  margin: 0 auto 28px;
+    width: 75%;
 }
 
 
-/* =========================================================
-   JOURNAL CONTENT
-========================================================= */
+/* ---------- CONTENT ---------- */
 
 .entry-content {
-  max-width: 780px;
+    max-width: 800px;
 
-  margin: 0 auto;
+    margin: 0 auto;
 
-  font-family: Georgia, "Times New Roman", serif;
+    font-family: "DM Sans", Arial, sans-serif;
 
-  font-size: 19px;
+    font-size: 17px;
 
-  line-height: 1.8;
+    line-height: 1.8;
 
-  color: #4f4a43;
+    text-align: center;
 
-  text-align: center;
-
-  overflow-wrap: anywhere;
+    overflow-wrap: anywhere;
 }
 
-
-/* Paragraphs */
 
 .entry-content p {
-  margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
-
-/* Lists */
 
 .entry-content ul,
 .entry-content ol {
-  width: fit-content;
+    margin: 0 auto 14px;
 
-  max-width: 100%;
+    width: fit-content;
 
-  margin: 0 auto 15px;
-
-  text-align: left;
+    text-align: left;
 }
 
 
-/* =========================================================
-   ENTRY FOOTER
-========================================================= */
+/* ---------- READ ONLY ---------- */
 
 .entry-bottom {
-  margin-top: 40px;
+    max-width: 800px;
 
-  padding-top: 18px;
+    margin: 40px auto 0;
 
-  border-top: 1px solid var(--line);
+    padding-top: 18px;
 
-  color: var(--muted);
+    border-top: 1px solid var(--line);
 
-  font-size: 12px;
+    font-size: 12px;
 
-  font-weight: 600;
+    font-weight: 600;
+
+    color: var(--muted);
+
+    text-align: center;
 }
 
 
 /* =========================================================
-   HOME JOURNAL MOBILE
+   MOBILE
 ========================================================= */
 
 @media (max-width: 650px) {
 
-  .site-header {
-    width: min(100% - 22px, 1100px);
+    /* ---------- HEADER ---------- */
 
-    padding-top: 28px;
+    .site-header {
+        width: calc(100% - 24px);
 
-    align-items: flex-start;
+        padding-top: 28px;
 
-    gap: 20px;
-  }
+        margin-bottom: 40px;
 
+        align-items: flex-start;
 
-  /* Header becomes vertical */
+        gap: 20px;
+    }
 
-  .brand {
-    font-size: 42px;
-  }
 
+    .brand {
+        font-size: 42px;
 
-  .header-button {
-    padding: 11px 15px;
+        letter-spacing: -1.5px;
+    }
 
-    font-size: 12px;
-  }
 
+    .header-button {
+        padding: 11px 15px;
 
-  /* Home page */
+        font-size: 12px;
+    }
 
-  .feed-page {
-    width: min(100% - 22px, 1100px);
 
-    padding-top: 20px;
-  }
+    /* ---------- FEED ---------- */
 
+    .feed-page {
+        width: calc(100% - 22px);
 
-  .journal-list {
-    gap: 30px;
-  }
+        padding-top: 20px;
 
+        padding-bottom: 50px;
+    }
 
-  .journal-card {
-    padding: 35px 23px 32px;
-  }
 
+    .journal-list {
+        gap: 30px;
+    }
 
-  .journal-card-title {
-    font-size: 27px;
-  }
 
+    .journal-card {
+        padding: 35px 23px 32px;
+    }
 
-  .journal-card-preview {
-    font-size: 14px;
 
-    line-height: 1.65;
-  }
+    .journal-card-main h2 {
+        font-size: 27px;
+    }
 
 
-  .journal-card .posted {
-    font-size: 12px;
-  }
+    .journal-card-main p {
+        font-size: 15px;
 
+        line-height: 1.7;
+    }
 
-  .journal-card::before {
-    width: 85px;
 
-    height: 23px;
-  }
+    .posted {
+        font-size: 12px;
+    }
 
 
-  /* Individual journal */
+    .read-button {
+        margin-top: 24px;
+    }
 
-  .entry-page {
-    width: min(100% - 22px, 1000px);
 
-    margin-top: 25px;
-  }
+    /* ---------- INDIVIDUAL ENTRY ---------- */
 
+    .entry-page {
+        width: calc(100% - 22px);
 
-  .full-entry {
-    padding: 38px 23px;
-  }
+        padding-top: 25px;
+    }
 
 
-  .full-entry h1 {
-    font-size: 32px;
-  }
+    .full-entry {
+        padding: 40px 23px 45px;
+    }
 
 
-  .entry-content {
-    font-size: 17px;
+    .full-entry h1 {
+        font-size: 34px;
+    }
 
-    line-height: 1.7;
-  }
 
+    .entry-content {
+        font-size: 16px;
 
-  /* Writing page */
+        line-height: 1.75;
+    }
 
-  .editor-shell {
-    padding: 8px;
-  }
 
+    /* ---------- WRITER ---------- */
 
-  .editor-toolbar {
-    flex-wrap: wrap;
-  }
+    .editor-shell {
+        padding: 8px;
+    }
 
 
-  .back-link {
-    width: 100%;
-  }
+    .editor-toolbar {
+        flex-wrap: wrap;
+    }
 
 
-  .title-field {
-    order: 5;
+    .back-link {
+        width: 100%;
+    }
 
-    width: 100%;
 
-    flex-basis: 100%;
-  }
+    .title-field {
+        order: 5;
 
+        width: 100%;
 
-  .post-button {
-    order: 6;
+        flex-basis: 100%;
+    }
 
-    width: 100%;
-  }
 
+    .post-button {
+        order: 6;
 
-  .paper {
-    min-height: calc(100vh - 190px);
+        width: 100%;
+    }
 
-    padding: 28px 20px;
-  }
-}
 
+    .paper {
+        min-height: calc(100vh - 150px);
 
-/* =========================================================
-   VERY SMALL SCREENS
-========================================================= */
-
-@media (max-width: 430px) {
-
-  .brand {
-    font-size: 35px;
-  }
-
-
-  .site-header {
-    flex-direction: column;
-
-    align-items: stretch;
-  }
-
-
-  .header-button {
-    width: 100%;
-  }
-
-
-  .journal-card {
-    padding: 32px 18px 28px;
-  }
-
-
-  .journal-card-title {
-    font-size: 25px;
-  }
-
-
-  .journal-card-preview {
-    font-size: 14px;
-  }
-
-
-  .full-entry {
-    padding: 35px 18px;
-  }
-
-
-  .full-entry h1 {
-    font-size: 28px;
-  }
+        padding: 25px 18px;
+    }
 }
