@@ -13,15 +13,10 @@ body {
     background: #000;
 }
 
-
-/* =========================
-   NAVIGATION BAR
-   ========================= */
-
 .navbar {
     height: 95px;
 
-    background: #7798c1;
+    background: #6E1D0A;
 
     display: flex;
     align-items: center;
@@ -36,8 +31,6 @@ body {
 }
 
 
-/* Website title */
-
 .logo {
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 
@@ -47,9 +40,6 @@ body {
 
     letter-spacing: -2px;
 }
-
-
-/* Navigation links */
 
 nav {
     display: flex;
@@ -72,11 +62,6 @@ nav a:hover {
     opacity: 0.55;
 }
 
-
-/* =========================
-   HERO
-   ========================= */
-
 .hero {
     min-height: calc(100vh - 95px);
 
@@ -90,9 +75,6 @@ nav a:hover {
 
     overflow: hidden;
 }
-
-
-/* Dark gradient */
 
 .hero-overlay {
     position: absolute;
@@ -110,11 +92,6 @@ nav a:hover {
 
     pointer-events: none;
 }
-
-
-/* =========================
-   HERO CONTENT
-   ========================= */
 
 .hero-content {
     position: relative;
@@ -195,12 +172,6 @@ h1 {
     box-shadow:
         0 1px 0 #850000;
 }
-
-
-/* =========================
-   MOBILE
-   ========================= */
-
 @media (max-width: 800px) {
 
     .navbar {
