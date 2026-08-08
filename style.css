@@ -1,222 +1,373 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html {
-    scroll-behavior: smooth;
+:root {
+  --black: #050505;
+  --red: #a40019;
+  --green: #16a847;
+  --blue: #789bc8;
+  --gray: #8b8b8b;
+  --paper: #ddc29a;
+  --paper-line: rgba(92, 62, 32, 0.42);
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #000;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--black);
+  color: #080808;
 }
 
-.navbar {
-    height: 95px;
+/* ---------- Header ---------- */
 
-    background: #6E1D0A;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 55px;
-
-    border: 3px solid #000;
-
-    position: relative;
-    z-index: 10;
+.site-header {
+  min-height: 90px;
+  margin: 4px;
+  padding: 12px 16px;
+  background: var(--red);
+  border: 4px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
-
-.logo {
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-
-    font-size: 50px;
-
-    color: #000;
-
-    letter-spacing: -2px;
+.brand {
+  font-size: clamp(38px, 5vw, 52px);
+  font-weight: 900;
+  line-height: 1;
 }
 
-nav {
-    display: flex;
-    align-items: center;
-
-    gap: 40px;
+.header-button,
+.read-button,
+.post-button {
+  border: 3px solid #000;
+  font-weight: 900;
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+  text-align: center;
 }
 
-nav a {
-    color: #000;
-
-    text-decoration: none;
-
-    font-size: 22px;
-
-    transition: 0.2s ease;
+.header-button {
+  background: var(--green);
+  padding: 13px 70px;
+  font-size: 20px;
 }
 
-nav a:hover {
-    opacity: 0.55;
+.header-button:hover,
+.read-button:hover,
+.post-button:hover {
+  filter: brightness(1.08);
 }
 
-.hero {
-    min-height: calc(100vh - 95px);
+/* ---------- Feed ---------- */
 
-    position: relative;
-
-    background-image: url("parking-bg.png");
-
-    background-size: cover;
-
-    background-position: center;
-
-    overflow: hidden;
+.feed-page {
+  padding: 0 4px 4px;
 }
 
-.hero-overlay {
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0.95) 0%,
-            rgba(0, 0, 0, 0.80) 20%,
-            rgba(0, 0, 0, 0.45) 45%,
-            rgba(0, 0, 0, 0.05) 75%
-        );
-
-    pointer-events: none;
+.status {
+  min-height: 0;
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: 700;
 }
 
-.hero-content {
-    position: relative;
-
-    z-index: 2;
-
-    padding-left: 55px;
-
-    padding-top: 110px;
-
-    max-width: 650px;
+.journal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-
-.small-text {
-    color: white;
-
-    font-size: 24px;
-
-    margin-bottom: 4px;
+.journal-card {
+  min-height: 125px;
+  padding: 18px 20px;
+  background: var(--gray);
+  border: 4px solid #000;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
 }
 
-
-h1 {
-    color: white;
-
-    font-size: 31px;
-
-    line-height: 1.35;
-
-    font-weight: 800;
-
-    margin-bottom: 25px;
-
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+.journal-card-main h2 {
+  font-size: 21px;
+  margin-bottom: 2px;
 }
 
-
-/* =========================
-   CONTACT BUTTON
-   ========================= */
-
-.contact-button {
-    display: inline-block;
-
-    background: #ed1c24;
-
-    color: #000;
-
-    text-decoration: none;
-
-    font-size: 28px;
-
-    padding: 7px 15px;
-
-    border-radius: 8px;
-
-    border: 3px solid #b40000;
-
-    box-shadow:
-        0 4px 0 #850000,
-        0 5px 12px rgba(0, 0, 0, 0.5);
-
-    transition: 0.15s ease;
+.journal-card-main h2 span {
+  font-weight: 400;
 }
 
-
-.contact-button:hover {
-    transform: translateY(-2px);
-
-    background: #ff2b32;
+.journal-card-main p {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
-
-.contact-button:active {
-    transform: translateY(3px);
-
-    box-shadow:
-        0 1px 0 #850000;
+.journal-card-side {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
 }
+
+.posted {
+  text-align: right;
+  font-size: 18px;
+}
+
+.read-button {
+  display: block;
+  background: var(--blue);
+  padding: 8px 10px;
+  font-size: 19px;
+}
+
+/* ---------- Writer ---------- */
+
+.editor-shell {
+  min-height: 100vh;
+  background: #000;
+  padding: 8px;
+}
+
+.editor-toolbar {
+  min-height: 48px;
+  background: #303030;
+  border: 3px solid #000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  color: #fff;
+}
+
+.back-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.back-link.dark {
+  color: #000;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 2px;
+}
+
+.toolbar-group button {
+  width: 34px;
+  height: 32px;
+  background: #161616;
+  color: #fff;
+  border: 1px solid #6d6d6d;
+  cursor: pointer;
+}
+
+.toolbar-group button:hover {
+  background: #555;
+}
+
+.title-field {
+  height: 32px;
+  flex: 1;
+  min-width: 180px;
+  background: #161616;
+  border: 1px solid #6d6d6d;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 8px;
+}
+
+.title-field span {
+  font-size: 13px;
+  font-weight: 900;
+  color: #aaa;
+}
+
+.title-field input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: #fff;
+  font-size: 15px;
+}
+
+.post-button {
+  background: var(--red);
+  color: #fff;
+  padding: 7px 25px;
+  min-width: 190px;
+}
+
+.post-button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.paper-wrap {
+  padding: 4px;
+}
+
+.paper {
+  min-height: calc(100vh - 80px);
+  padding: 28px 24px;
+  outline: none;
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 20px,
+    var(--paper-line) 21px,
+    transparent 22px
+  );
+  border: 3px solid #000;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.paper:empty::before {
+  content: attr(data-placeholder);
+  color: rgba(70, 45, 25, 0.55);
+  pointer-events: none;
+}
+
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  padding: 7px 5px;
+  font-size: 13px;
+}
+
+.limit-warning {
+  color: #ff5555;
+}
+
+.write-status {
+  color: #fff;
+  text-align: center;
+  min-height: 20px;
+}
+
+/* ---------- Individual entry ---------- */
+
+.entry-page {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px 50px;
+}
+
+.full-entry {
+  background: var(--gray);
+  border: 4px solid #000;
+  padding: 28px;
+}
+
+.entry-meta {
+  text-align: right;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.full-entry h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  margin-bottom: 4px;
+}
+
+.anonymous {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.full-entry hr {
+  border: 0;
+  border-top: 3px solid #000;
+  margin-bottom: 24px;
+}
+
+.entry-content {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.entry-content p {
+  margin-bottom: 12px;
+}
+
+.entry-content ul,
+.entry-content ol {
+  margin: 0 0 12px 28px;
+}
+
+.entry-bottom {
+  margin-top: 35px;
+  padding-top: 15px;
+  border-top: 2px solid #000;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ---------- Mobile ---------- */
+
 @media (max-width: 800px) {
+  .site-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    .navbar {
-        height: auto;
+  .header-button {
+    padding: 12px 20px;
+  }
 
-        min-height: 80px;
+  .journal-card {
+    grid-template-columns: 1fr;
+  }
 
-        padding: 15px 20px;
+  .journal-card-side {
+    gap: 12px;
+  }
 
-        flex-direction: column;
+  .posted {
+    text-align: left;
+  }
 
-        gap: 15px;
-    }
+  .editor-toolbar {
+    flex-wrap: wrap;
+  }
 
-    .logo {
-        font-size: 38px;
-    }
+  .back-link {
+    width: 100%;
+  }
 
-    nav {
-        gap: 18px;
+  .title-field {
+    order: 5;
+    width: 100%;
+    flex-basis: 100%;
+  }
 
-        flex-wrap: wrap;
+  .post-button {
+    order: 6;
+    width: 100%;
+  }
 
-        justify-content: center;
-    }
-
-    nav a {
-        font-size: 16px;
-    }
-
-    .hero-content {
-        padding: 80px 25px;
-
-        max-width: 100%;
-    }
-
-    .small-text {
-        font-size: 20px;
-    }
-
-    h1 {
-        font-size: 25px;
-    }
-
-    .contact-button {
-        font-size: 23px;
-    }
+  .paper {
+    min-height: calc(100vh - 150px);
+  }
 }

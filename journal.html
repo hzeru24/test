@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Public Journal</title>
+  <title>Journal Entry - Public Journal</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body data-page="home">
+<body data-page="journal">
 
 <header class="site-header">
   <div class="brand">Public Journal</div>
   <a class="header-button" href="write.html">WRITE ENTRY</a>
 </header>
 
-<main class="feed-page">
-  <div id="status" class="status">Loading journals...</div>
-  <section id="journal-list" class="journal-list" aria-live="polite"></section>
+<main class="entry-page">
+  <a class="back-link dark" href="index.html">← BACK TO JOURNAL</a>
+  <article id="entry" class="full-entry">
+    <div id="entry-status" class="status">Loading entry...</div>
+  </article>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
