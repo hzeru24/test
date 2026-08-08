@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap');
 
 
 /* =========================================================
@@ -12,80 +12,65 @@
 }
 
 :root {
+    --background: #e9e1d3;
     --paper: #fffdf7;
-    --paper-dark: #f4eee2;
+    --paper-shadow: rgba(70, 55, 35, 0.16);
+
     --ink: #292722;
     --muted: #777268;
+
+    --title: #a65343;
+    --title-dark: #874234;
 
     --green: #536b52;
     --green-dark: #3f543f;
 
-    --accent: #a95745;
-    --accent-dark: #8e4032;
-
     --line: #e3dacb;
-    --background: #e9e1d3;
+    --tape: rgba(206, 185, 145, 0.45);
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     min-height: 100vh;
 
-    font-family: "DM Sans", Arial, sans-serif;
-
     color: var(--ink);
 
-    background:
+    font-family: "DM Sans", Arial, sans-serif;
+
+    background-color: var(--background);
+
+    /*
+       Subtle paper/table texture
+    */
+    background-image:
         radial-gradient(
             circle at 20% 20%,
-            rgba(255,255,255,.7),
+            rgba(255, 255, 255, 0.65),
             transparent 30%
         ),
         radial-gradient(
             circle at 80% 70%,
-            rgba(190,170,140,.15),
+            rgba(190, 170, 140, 0.15),
             transparent 35%
         ),
-        var(--background);
-
-    background-image:
         linear-gradient(
-            rgba(255,255,255,.25) 1px,
+            rgba(255, 255, 255, 0.22) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255,255,255,.18) 1px,
+            rgba(255, 255, 255, 0.14) 1px,
             transparent 1px
         );
 
-    background-size: 28px 28px;
-}
-
-
-/* =========================================================
-   MAIN PAGE
-========================================================= */
-
-.feed-page {
-    width: min(1100px, calc(100% - 40px));
-
-    margin: 0 auto;
-
-    padding: 45px 0 80px;
-}
-
-
-.status {
-    text-align: center;
-
-    color: var(--muted);
-
-    font-size: 14px;
-
-    min-height: 20px;
-
-    margin-bottom: 25px;
+    background-size:
+        auto,
+        auto,
+        28px 28px,
+        28px 28px;
 }
 
 
@@ -94,25 +79,17 @@ body {
 ========================================================= */
 
 .site-header {
-    width: min(1100px, calc(100% - 40px));
+    width: min(1100px, calc(100% - 32px));
 
     margin: 0 auto;
-
-    padding-top: 45px;
+    padding: 45px 0 35px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 25px;
-
-    margin-bottom: 55px;
 }
-
-
-/* ---------- LOGO ---------- */
 
 .brand {
     position: relative;
@@ -123,13 +100,10 @@ body {
 
     font-weight: 700;
 
-    line-height: .95;
+    line-height: 0.95;
 
     letter-spacing: -2px;
-
-    color: var(--ink);
 }
-
 
 .brand::after {
     content: "";
@@ -137,29 +111,31 @@ body {
     display: block;
 
     width: 75px;
-
     height: 3px;
 
     margin-top: 12px;
 
-    background: var(--accent);
+    background: var(--title);
 
     border-radius: 10px;
 }
 
 
-/* ---------- WRITE BUTTON ---------- */
+/* =========================================================
+   WRITE ENTRY BUTTON
+========================================================= */
 
 .header-button {
     display: inline-flex;
 
     align-items: center;
+    justify-content: center;
 
     gap: 10px;
 
     padding: 14px 23px;
 
-    border: 1px solid rgba(63,84,63,.3);
+    border: 1px solid rgba(63, 84, 63, 0.3);
 
     border-radius: 50px;
 
@@ -175,17 +151,14 @@ body {
 
     text-decoration: none;
 
-    white-space: nowrap;
-
     box-shadow:
-        0 8px 20px rgba(63,84,63,.18);
+        0 8px 20px rgba(63, 84, 63, 0.18);
 
     transition:
-        transform .2s ease,
-        background .2s ease,
-        box-shadow .2s ease;
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
-
 
 .header-button::before {
     content: "+";
@@ -195,14 +168,38 @@ body {
     line-height: 0;
 }
 
-
 .header-button:hover {
     background: var(--green-dark);
 
     transform: translateY(-2px);
 
     box-shadow:
-        0 12px 25px rgba(63,84,63,.25);
+        0 12px 25px rgba(63, 84, 63, 0.25);
+}
+
+
+/* =========================================================
+   HOME / JOURNAL FEED
+========================================================= */
+
+.feed-page {
+    width: min(1100px, calc(100% - 32px));
+
+    margin: 0 auto;
+
+    padding: 0 0 80px;
+}
+
+.status {
+    color: var(--muted);
+
+    font-size: 14px;
+
+    text-align: center;
+
+    min-height: 20px;
+
+    margin-bottom: 20px;
 }
 
 
@@ -215,7 +212,7 @@ body {
 
     flex-direction: column;
 
-    gap: 38px;
+    gap: 42px;
 }
 
 
@@ -223,62 +220,56 @@ body {
    JOURNAL PAPER
 ========================================================= */
 
-/*
-   IMPORTANT:
-
-   These class names match the HTML generated by script.js:
-
-   .journal-card
-   .journal-card-main
-   .journal-card-side
-   .posted
-   .read-button
-*/
-
-
 .journal-card {
     position: relative;
 
     width: 100%;
 
-    padding: 42px 50px 40px;
+    min-height: 300px;
+
+    padding: 38px 70px 42px;
 
     background:
         linear-gradient(
-            rgba(255,255,255,.72),
-            rgba(255,255,255,.72)
+            rgba(255, 255, 255, 0.72),
+            rgba(255, 255, 255, 0.72)
         ),
         var(--paper);
 
-    border: 1px solid rgba(100,85,65,.15);
+    border: 1px solid rgba(100, 85, 65, 0.14);
 
     box-shadow:
-        0 5px 8px rgba(65,50,30,.08),
-        0 18px 40px rgba(65,50,30,.10);
+        0 4px 8px rgba(65, 50, 30, 0.08),
+        0 18px 38px var(--paper-shadow);
 
-    text-align: center;
-
-    transform: rotate(-.25deg);
+    /*
+       Slightly imperfect paper positioning
+    */
+    transform: rotate(-0.25deg);
 
     transition:
-        transform .25s ease,
-        box-shadow .25s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    /*
+       IMPORTANT:
+       Override the old grid layout.
+       Everything is now vertically centered.
+    */
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
 }
-
-
-/* Alternate paper angle */
 
 .journal-card:nth-child(even) {
-    transform: rotate(.3deg);
+    transform: rotate(0.3deg);
 }
-
-
-.journal-card:nth-child(3n) {
-    transform: rotate(-.15deg);
-}
-
-
-/* Hover */
 
 .journal-card:hover {
     transform:
@@ -286,13 +277,13 @@ body {
         rotate(0deg);
 
     box-shadow:
-        0 8px 12px rgba(65,50,30,.10),
-        0 25px 50px rgba(65,50,30,.14);
+        0 8px 14px rgba(65, 50, 30, 0.10),
+        0 24px 48px rgba(65, 50, 30, 0.13);
 }
 
 
 /* =========================================================
-   PAPER TAPE
+   PAPER TAPE DECORATION
 ========================================================= */
 
 .journal-card::before {
@@ -301,7 +292,6 @@ body {
     position: absolute;
 
     width: 115px;
-
     height: 27px;
 
     top: -13px;
@@ -310,12 +300,11 @@ body {
 
     transform:
         translateX(-50%)
-        rotate(-1deg);
+        rotate(-2deg);
 
-    background: rgba(206,185,145,.42);
+    background: var(--tape);
 
-    box-shadow:
-        0 1px 3px rgba(100,80,50,.05);
+    z-index: 2;
 
     pointer-events: none;
 }
@@ -325,118 +314,134 @@ body {
    JOURNAL CONTENT
 ========================================================= */
 
-/*
-   We use display: contents on the side container.
-
-   This lets the timestamp and READ JOURNAL button
-   participate directly in the paper's centered layout.
-
-   This is what fixes the desktop ordering.
-*/
-
-.journal-card-side {
-    display: contents;
-}
-
-
-/* =========================================================
-   TIMESTAMP
-========================================================= */
-
-.posted {
-    order: 1;
-
-    width: 100%;
-
-    text-align: center;
-
-    color: var(--muted);
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    letter-spacing: .05em;
-
-    margin-bottom: 16px;
-}
-
-
-/* =========================================================
-   TITLE + JOURNAL PREVIEW
-========================================================= */
-
 .journal-card-main {
-    order: 2;
-
     width: 100%;
+
+    max-width: 850px;
 
     display: flex;
 
     flex-direction: column;
 
     align-items: center;
-}
-
-
-/* ---------- TITLE ---------- */
-
-.journal-card-main h2 {
-    margin: 0 0 10px;
-
-    max-width: 900px;
-
-    font-family: "Playfair Display", Georgia, serif;
-
-    font-size: clamp(28px, 3.5vw, 40px);
-
-    line-height: 1.2;
-
-    font-weight: 700;
-
-    color: var(--accent);
 
     text-align: center;
 }
 
 
-/* ---------- ANONYMOUS ---------- */
+/* =========================================================
+   DATE
+========================================================= */
+
+.journal-card-side {
+    /*
+       The old layout had the date and button
+       in a separate right-side column.
+
+       We are changing it into a normal vertical
+       section so the date appears at the top.
+    */
+
+    width: 100%;
+
+    max-width: 850px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    order: -1;
+
+    margin-bottom: 12px;
+}
+
+.posted {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.06em;
+
+    text-transform: uppercase;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.journal-card-main h2 {
+    margin: 0 0 12px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: clamp(28px, 3.5vw, 38px);
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: var(--title);
+
+    text-align: center;
+}
 
 .journal-card-main h2 span {
     display: block;
 
     margin-top: 8px;
 
-    font-family: "DM Sans", Arial, sans-serif;
+    font-family:
+        "DM Sans",
+        Arial,
+        sans-serif;
 
     font-size: 13px;
 
     font-weight: 500;
 
-    letter-spacing: .04em;
-
     color: var(--muted);
+
+    letter-spacing: 0.02em;
 }
 
 
-/* ---------- JOURNAL PREVIEW ---------- */
+/* =========================================================
+   JOURNAL PREVIEW / CONTENT
+========================================================= */
 
 .journal-card-main p {
-    width: min(800px, 100%);
+    width: 100%;
+
+    max-width: 800px;
 
     margin: 0 auto;
 
     color: #5f5a51;
 
-    font-family: "DM Sans", Arial, sans-serif;
+    font-family:
+        "DM Sans",
+        Arial,
+        sans-serif;
 
-    font-size: 16px;
+    font-size: 15px;
+
+    font-weight: 400;
 
     line-height: 1.75;
 
     text-align: center;
-
-    font-weight: 400;
 
     overflow-wrap: anywhere;
 }
@@ -447,31 +452,29 @@ body {
 ========================================================= */
 
 .read-button {
-    order: 3;
-
-    justify-self: center;
-
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 8px;
 
-    margin: 28px auto 0;
+    margin-top: 25px;
 
-    padding: 11px 20px;
+    padding: 10px 18px;
 
     border: 1px solid var(--line);
 
     border-radius: 30px;
 
-    background: rgba(255,255,255,.45);
+    background: transparent;
 
     color: var(--ink);
 
-    font-family: "DM Sans", Arial, sans-serif;
+    font-family:
+        "DM Sans",
+        Arial,
+        sans-serif;
 
     font-size: 13px;
 
@@ -482,12 +485,11 @@ body {
     cursor: pointer;
 
     transition:
-        background .2s ease,
-        color .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        border-color 0.2s ease;
 }
-
 
 .read-button::after {
     content: "→";
@@ -495,16 +497,23 @@ body {
     font-size: 17px;
 }
 
-
 .read-button:hover {
     background: var(--ink);
+
+    border-color: var(--ink);
 
     color: white;
 
     transform: translateX(3px);
+}
 
-    box-shadow:
-        0 5px 12px rgba(40,35,30,.15);
+
+/* =========================================================
+   MAKE BUTTON SIT BELOW THE JOURNAL
+========================================================= */
+
+.journal-card-side .read-button {
+    margin-top: 20px;
 }
 
 
@@ -515,18 +524,17 @@ body {
 .editor-shell {
     min-height: 100vh;
 
-    background: var(--background);
+    padding: 8px;
 
-    padding: 20px;
+    background: #191816;
 }
-
 
 .editor-toolbar {
     min-height: 48px;
 
-    background: #303030;
+    background: #30302d;
 
-    border: 1px solid #222;
+    border: 1px solid #111;
 
     display: flex;
 
@@ -534,14 +542,13 @@ body {
 
     gap: 6px;
 
-    padding: 6px;
+    padding: 5px 7px;
 
-    color: #fff;
+    color: white;
 }
 
-
 .back-link {
-    color: #fff;
+    color: white;
 
     text-decoration: none;
 
@@ -552,7 +559,6 @@ body {
     margin-right: 8px;
 }
 
-
 .back-link.dark {
     color: var(--ink);
 
@@ -561,33 +567,28 @@ body {
     margin-bottom: 18px;
 }
 
-
 .toolbar-group {
     display: flex;
 
     gap: 2px;
 }
 
-
 .toolbar-group button {
     width: 34px;
-
     height: 32px;
 
     background: #161616;
 
-    color: #fff;
+    color: white;
 
-    border: 1px solid #6d6d6d;
+    border: 1px solid #666;
 
     cursor: pointer;
 }
 
-
 .toolbar-group button:hover {
     background: #555;
 }
-
 
 .title-field {
     height: 32px;
@@ -598,7 +599,7 @@ body {
 
     background: #161616;
 
-    border: 1px solid #6d6d6d;
+    border: 1px solid #666;
 
     display: flex;
 
@@ -609,15 +610,13 @@ body {
     gap: 8px;
 }
 
-
 .title-field span {
     font-size: 13px;
 
-    font-weight: 900;
+    font-weight: 700;
 
     color: #aaa;
 }
-
 
 .title-field input {
     flex: 1;
@@ -630,44 +629,41 @@ body {
 
     outline: 0;
 
-    color: #fff;
+    color: white;
 
     font-size: 15px;
 }
 
-
 .post-button {
-    background: var(--red, #a40019);
+    border: 0;
 
-    color: #fff;
+    background: var(--green);
 
-    padding: 7px 25px;
+    color: white;
+
+    padding: 8px 25px;
 
     min-width: 190px;
-
-    border: 0;
 
     font-weight: 700;
 
     cursor: pointer;
 }
 
-
 .post-button:disabled {
-    opacity: .5;
+    opacity: 0.5;
 
     cursor: wait;
 }
 
 
 /* =========================================================
-   WRITING PAPER
+   PAPER EDITOR
 ========================================================= */
 
 .paper-wrap {
     padding: 4px;
 }
-
 
 .paper {
     min-height: calc(100vh - 80px);
@@ -683,52 +679,48 @@ body {
             to bottom,
             transparent 0,
             transparent 20px,
-            rgba(92,62,32,.20) 21px,
+            rgba(92, 62, 32, 0.18) 21px,
             transparent 22px
         );
 
-    border: 1px solid rgba(100,85,65,.15);
+    border: 1px solid #d8cdbb;
 
-    box-shadow:
-        0 8px 25px rgba(65,50,30,.10);
-
-    font-family: Georgia, "Times New Roman", serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size: 18px;
 
     line-height: 22px;
 }
 
-
 .paper:empty::before {
     content: attr(data-placeholder);
 
-    color: rgba(70,45,25,.55);
+    color: rgba(70, 45, 25, 0.55);
 
     pointer-events: none;
 }
-
 
 .editor-footer {
     display: flex;
 
     justify-content: space-between;
 
-    color: var(--muted);
+    color: white;
 
     padding: 7px 5px;
 
     font-size: 13px;
 }
 
-
 .limit-warning {
-    color: #b43d3d;
+    color: #ff5555;
 }
 
-
 .write-status {
-    color: var(--muted);
+    color: white;
 
     text-align: center;
 
@@ -741,61 +733,38 @@ body {
 ========================================================= */
 
 .entry-page {
-    width: min(1000px, calc(100% - 40px));
+    width: min(900px, calc(100% - 32px));
 
     margin: 0 auto;
 
-    padding: 45px 0 80px;
+    padding: 20px 0 80px;
 }
-
-
-/* ---------- BACK LINK ---------- */
-
-.entry-page .back-link {
-    color: var(--ink);
-
-    display: inline-block;
-
-    margin-bottom: 25px;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    text-decoration: none;
-}
-
-
-.entry-page .back-link:hover {
-    color: var(--accent);
-}
-
-
-/* ---------- FULL PAPER ---------- */
 
 .full-entry {
     position: relative;
 
-    padding: 55px 70px 60px;
-
     background:
         linear-gradient(
-            rgba(255,255,255,.72),
-            rgba(255,255,255,.72)
+            rgba(255, 255, 255, 0.72),
+            rgba(255, 255, 255, 0.72)
         ),
         var(--paper);
 
-    border: 1px solid rgba(100,85,65,.15);
+    border: 1px solid rgba(100, 85, 65, 0.14);
+
+    padding: 55px 70px 65px;
 
     box-shadow:
-        0 5px 8px rgba(65,50,30,.08),
-        0 18px 40px rgba(65,50,30,.10);
+        0 5px 10px rgba(65, 50, 30, 0.08),
+        0 20px 45px rgba(65, 50, 30, 0.14);
+
+    transform: rotate(-0.2deg);
 
     text-align: center;
 }
 
 
-/* ---------- TAPE ---------- */
+/* tape on individual journal */
 
 .full-entry::before {
     content: "";
@@ -803,23 +772,28 @@ body {
     position: absolute;
 
     width: 115px;
-
     height: 27px;
 
     top: -13px;
 
     left: 50%;
 
-    transform: translateX(-50%) rotate(-1deg);
+    transform:
+        translateX(-50%)
+        rotate(-2deg);
 
-    background: rgba(206,185,145,.42);
+    background: var(--tape);
+
+    pointer-events: none;
 }
 
 
-/* ---------- DATE ---------- */
+/* =========================================================
+   INDIVIDUAL ENTRY DATE
+========================================================= */
 
 .entry-meta {
-    text-align: center;
+    margin-bottom: 15px;
 
     color: var(--muted);
 
@@ -827,45 +801,53 @@ body {
 
     font-weight: 600;
 
-    letter-spacing: .05em;
+    letter-spacing: 0.06em;
 
-    margin-bottom: 18px;
-}
-
-
-/* ---------- TITLE ---------- */
-
-.full-entry h1 {
-    margin: 0 0 10px;
-
-    font-family: "Playfair Display", Georgia, serif;
-
-    font-size: clamp(32px, 5vw, 52px);
-
-    line-height: 1.15;
-
-    color: var(--accent);
+    text-transform: uppercase;
 
     text-align: center;
 }
 
 
-/* ---------- ANONYMOUS ---------- */
+/* =========================================================
+   INDIVIDUAL ENTRY TITLE
+========================================================= */
+
+.full-entry h1 {
+    margin: 0 0 10px;
+
+    color: var(--title);
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: clamp(32px, 5vw, 52px);
+
+    line-height: 1.15;
+
+    font-weight: 700;
+
+    text-align: center;
+}
 
 .anonymous {
     margin-bottom: 25px;
+
+    color: var(--muted);
 
     font-size: 13px;
 
     font-weight: 500;
 
-    color: var(--muted);
-
-    letter-spacing: .04em;
+    text-align: center;
 }
 
 
-/* ---------- DIVIDER ---------- */
+/* =========================================================
+   DIVIDER
+========================================================= */
 
 .full-entry hr {
     border: 0;
@@ -874,20 +856,27 @@ body {
 
     margin: 0 auto 28px;
 
-    width: 75%;
+    max-width: 650px;
 }
 
 
-/* ---------- CONTENT ---------- */
+/* =========================================================
+   INDIVIDUAL ENTRY CONTENT
+========================================================= */
 
 .entry-content {
-    max-width: 800px;
+    max-width: 760px;
 
     margin: 0 auto;
 
-    font-family: "DM Sans", Arial, sans-serif;
+    color: #4f4a43;
 
-    font-size: 17px;
+    font-family:
+        "DM Sans",
+        Arial,
+        sans-serif;
+
+    font-size: 16px;
 
     line-height: 1.8;
 
@@ -896,15 +885,15 @@ body {
     overflow-wrap: anywhere;
 }
 
-
 .entry-content p {
     margin-bottom: 14px;
 }
 
-
 .entry-content ul,
 .entry-content ol {
     margin: 0 auto 14px;
+
+    padding-left: 25px;
 
     width: fit-content;
 
@@ -912,22 +901,24 @@ body {
 }
 
 
-/* ---------- READ ONLY ---------- */
+/* =========================================================
+   READ-ONLY NOTICE
+========================================================= */
 
 .entry-bottom {
-    max-width: 800px;
+    max-width: 650px;
 
-    margin: 40px auto 0;
+    margin: 35px auto 0;
 
-    padding-top: 18px;
+    padding-top: 16px;
 
     border-top: 1px solid var(--line);
+
+    color: var(--muted);
 
     font-size: 12px;
 
     font-weight: 600;
-
-    color: var(--muted);
 
     text-align: center;
 }
@@ -939,27 +930,19 @@ body {
 
 @media (max-width: 650px) {
 
-    /* ---------- HEADER ---------- */
-
     .site-header {
-        width: calc(100% - 24px);
+        width: min(100% - 22px, 1100px);
 
         padding-top: 28px;
-
-        margin-bottom: 40px;
 
         align-items: flex-start;
 
         gap: 20px;
     }
 
-
     .brand {
         font-size: 42px;
-
-        letter-spacing: -1.5px;
     }
-
 
     .header-button {
         padding: 11px 15px;
@@ -967,92 +950,63 @@ body {
         font-size: 12px;
     }
 
-
-    /* ---------- FEED ---------- */
-
     .feed-page {
-        width: calc(100% - 22px);
-
-        padding-top: 20px;
-
-        padding-bottom: 50px;
+        width: min(100% - 22px, 1100px);
     }
-
 
     .journal-list {
         gap: 30px;
     }
 
-
     .journal-card {
-        padding: 35px 23px 32px;
-    }
+        min-height: 270px;
 
+        padding: 32px 24px 35px;
+    }
 
     .journal-card-main h2 {
-        font-size: 27px;
+        font-size: 28px;
     }
-
 
     .journal-card-main p {
-        font-size: 15px;
+        font-size: 14px;
 
-        line-height: 1.7;
+        line-height: 1.65;
     }
-
 
     .posted {
-        font-size: 12px;
+        font-size: 11px;
     }
-
 
     .read-button {
-        margin-top: 24px;
+        font-size: 12px;
+
+        padding: 9px 15px;
     }
-
-
-    /* ---------- INDIVIDUAL ENTRY ---------- */
 
     .entry-page {
-        width: calc(100% - 22px);
-
-        padding-top: 25px;
+        width: min(100% - 22px, 900px);
     }
-
 
     .full-entry {
-        padding: 40px 23px 45px;
+        padding: 45px 25px 50px;
     }
-
 
     .full-entry h1 {
         font-size: 34px;
     }
 
-
     .entry-content {
-        font-size: 16px;
-
-        line-height: 1.75;
+        font-size: 15px;
     }
-
-
-    /* ---------- WRITER ---------- */
-
-    .editor-shell {
-        padding: 8px;
-    }
-
 
     .editor-toolbar {
         flex-wrap: wrap;
     }
 
-
     .back-link {
         width: 100%;
     }
-
 
     .title-field {
         order: 5;
@@ -1062,17 +1016,13 @@ body {
         flex-basis: 100%;
     }
 
-
     .post-button {
         order: 6;
 
         width: 100%;
     }
 
-
     .paper {
         min-height: calc(100vh - 150px);
-
-        padding: 25px 18px;
     }
 }
