@@ -1,0 +1,251 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #000;
+}
+
+
+/* =========================
+   NAVIGATION BAR
+   ========================= */
+
+.navbar {
+    height: 95px;
+
+    background: #7798c1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 55px;
+
+    border: 3px solid #000;
+
+    position: relative;
+    z-index: 10;
+}
+
+
+/* Website title */
+
+.logo {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+
+    font-size: 50px;
+
+    color: #000;
+
+    letter-spacing: -2px;
+}
+
+
+/* Navigation links */
+
+nav {
+    display: flex;
+    align-items: center;
+
+    gap: 40px;
+}
+
+nav a {
+    color: #000;
+
+    text-decoration: none;
+
+    font-size: 22px;
+
+    transition: 0.2s ease;
+}
+
+nav a:hover {
+    opacity: 0.55;
+}
+
+
+/* =========================
+   HERO
+   ========================= */
+
+.hero {
+    min-height: calc(100vh - 95px);
+
+    position: relative;
+
+    background-image: url("parking-bg.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    overflow: hidden;
+}
+
+
+/* Dark gradient */
+
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.80) 20%,
+            rgba(0, 0, 0, 0.45) 45%,
+            rgba(0, 0, 0, 0.05) 75%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   HERO CONTENT
+   ========================= */
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    padding-left: 55px;
+
+    padding-top: 110px;
+
+    max-width: 650px;
+}
+
+
+.small-text {
+    color: white;
+
+    font-size: 24px;
+
+    margin-bottom: 4px;
+}
+
+
+h1 {
+    color: white;
+
+    font-size: 31px;
+
+    line-height: 1.35;
+
+    font-weight: 800;
+
+    margin-bottom: 25px;
+
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================
+   CONTACT BUTTON
+   ========================= */
+
+.contact-button {
+    display: inline-block;
+
+    background: #ed1c24;
+
+    color: #000;
+
+    text-decoration: none;
+
+    font-size: 28px;
+
+    padding: 7px 15px;
+
+    border-radius: 8px;
+
+    border: 3px solid #b40000;
+
+    box-shadow:
+        0 4px 0 #850000,
+        0 5px 12px rgba(0, 0, 0, 0.5);
+
+    transition: 0.15s ease;
+}
+
+
+.contact-button:hover {
+    transform: translateY(-2px);
+
+    background: #ff2b32;
+}
+
+
+.contact-button:active {
+    transform: translateY(3px);
+
+    box-shadow:
+        0 1px 0 #850000;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        height: auto;
+
+        min-height: 80px;
+
+        padding: 15px 20px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 38px;
+    }
+
+    nav {
+        gap: 18px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    nav a {
+        font-size: 16px;
+    }
+
+    .hero-content {
+        padding: 80px 25px;
+
+        max-width: 100%;
+    }
+
+    .small-text {
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .contact-button {
+        font-size: 23px;
+    }
+}
