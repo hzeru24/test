@@ -76,26 +76,32 @@
   card.className = "journal-card";
 
   card.innerHTML = `
-    <div class="journal-date">
-      ${escapeHTML(formatDate(entry.created_at))}
+    <div class="journal-card-content">
+
+      <div class="posted">
+        ${escapeHTML(formatDate(entry.created_at))}
+      </div>
+
+      <h2 class="journal-card-title">
+        ${escapeHTML(entry.title)}
+      </h2>
+
+      <div class="journal-card-anonymous">
+        Anonymous
+      </div>
+
+      <p class="journal-card-preview">
+        ${escapeHTML(excerpt(entry.content))}
+      </p>
+
+      <a
+        class="read-button"
+        href="journal.html?id=${encodeURIComponent(entry.id)}"
+      >
+        READ JOURNAL
+      </a>
+
     </div>
-
-    <h2 class="journal-title">
-      ${escapeHTML(entry.title)}
-    </h2>
-
-    <div class="journal-author">
-      Anonymous
-    </div>
-
-    <div class="journal-content">
-      ${escapeHTML(excerpt(entry.content))}
-    </div>
-
-    <a class="read-button"
-       href="journal.html?id=${encodeURIComponent(entry.id)}">
-      READ JOURNAL
-    </a>
   `;
 
   list.appendChild(card);
