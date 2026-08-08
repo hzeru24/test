@@ -12,15 +12,13 @@
 }
 
 :root {
-  --background: #e9e1d3;
   --paper: #fffdf7;
-  --paper-light: #fffefa;
-
+  --paper-dark: #f4eee2;
   --ink: #292722;
   --muted: #777268;
 
-  --title: #b05d50;
-  --title-dark: #974b40;
+  /* Main journal title color */
+  --title-red: #b45f50;
 
   --green: #536b52;
   --green-dark: #3f543f;
@@ -28,43 +26,28 @@
   --accent: #b46b52;
   --line: #e3dacb;
 
-  --shadow:
-    0 8px 18px rgba(65, 50, 30, 0.08),
-    0 22px 45px rgba(65, 50, 30, 0.10);
+  --paper-line: rgba(110, 90, 60, 0.12);
 }
 
-html {
-  scroll-behavior: smooth;
-}
 
 body {
   min-height: 100vh;
+  margin: 0;
 
   color: var(--ink);
 
-  font-family: "DM Sans", Arial, Helvetica, sans-serif;
+  font-family: "DM Sans", sans-serif;
 
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(255, 255, 255, 0.75),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 80% 70%,
-      rgba(190, 170, 140, 0.16),
-      transparent 35%
-    ),
-    var(--background);
+  background-color: #e9e1d3;
 
   background-image:
     linear-gradient(
-      rgba(255, 255, 255, 0.20) 1px,
+      rgba(255, 255, 255, 0.25) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.14) 1px,
+      rgba(255, 255, 255, 0.18) 1px,
       transparent 1px
     );
 
@@ -77,43 +60,33 @@ body {
 ========================================================= */
 
 .site-header {
-  width: min(1320px, calc(100% - 60px));
+  width: min(1310px, calc(100% - 60px));
 
   margin: 0 auto;
-  padding: 30px 0 55px;
-
-  background: transparent;
-
-  border: 0;
+  padding: 20px 0 45px;
 
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
 
   gap: 30px;
 }
 
 
-/* Public Journal logo */
-
 .brand {
   position: relative;
 
-  color: var(--ink);
-
   font-family: "Playfair Display", Georgia, serif;
 
-  font-size: clamp(44px, 6vw, 72px);
-
+  font-size: clamp(42px, 5vw, 68px);
   font-weight: 700;
 
   line-height: 0.95;
+  letter-spacing: -2px;
 
-  letter-spacing: -3px;
+  color: var(--ink);
 }
 
-
-/* Small decorative line under logo */
 
 .brand::after {
   content: "";
@@ -123,7 +96,7 @@ body {
   width: 86px;
   height: 3px;
 
-  margin-top: 18px;
+  margin-top: 16px;
 
   background: var(--accent);
 
@@ -132,7 +105,7 @@ body {
 
 
 /* =========================================================
-   WRITE ENTRY BUTTON
+   HEADER WRITE BUTTON
 ========================================================= */
 
 .header-button {
@@ -141,24 +114,20 @@ body {
   align-items: center;
   justify-content: center;
 
-  gap: 9px;
+  gap: 10px;
 
-  margin-top: 2px;
-
-  padding: 15px 27px;
+  padding: 14px 25px;
 
   border: 1px solid rgba(63, 84, 63, 0.3);
-
   border-radius: 50px;
 
   background: var(--green);
 
-  color: #ffffff;
+  color: #fff;
 
   font-family: "DM Sans", sans-serif;
 
   font-size: 14px;
-
   font-weight: 700;
 
   text-decoration: none;
@@ -173,13 +142,10 @@ body {
 }
 
 
-/* Plus symbol */
-
 .header-button::before {
   content: "+";
 
   font-size: 20px;
-
   line-height: 0;
 }
 
@@ -195,36 +161,32 @@ body {
 
 
 /* =========================================================
-   HOME PAGE
+   HOME / JOURNAL FEED
 ========================================================= */
 
 .feed-page {
-  width: min(1320px, calc(100% - 60px));
+  width: min(1310px, calc(100% - 60px));
 
   margin: 0 auto;
 
-  padding: 0 0 80px;
+  padding-bottom: 80px;
 }
 
 
-/* Loading / status message */
-
 .status {
-  min-height: 0;
+  min-height: 20px;
 
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+
+  text-align: center;
 
   color: var(--muted);
 
   font-size: 14px;
-
-  text-align: center;
 }
 
 
-/* =========================================================
-   JOURNAL LIST
-========================================================= */
+/* Space between journal papers */
 
 .journal-list {
   display: flex;
@@ -236,7 +198,7 @@ body {
 
 
 /* =========================================================
-   HOME JOURNAL PAPER
+   JOURNAL PAPER
 ========================================================= */
 
 .journal-card {
@@ -244,34 +206,24 @@ body {
 
   width: 100%;
 
-  min-height: 400px;
-
-  padding: 48px 70px 52px;
+  padding: 48px 70px 50px;
 
   background:
     linear-gradient(
-      rgba(255, 255, 255, 0.72),
-      rgba(255, 255, 255, 0.72)
+      rgba(255, 255, 255, 0.82),
+      rgba(255, 255, 255, 0.82)
     ),
     var(--paper);
 
   border: 1px solid rgba(100, 85, 65, 0.12);
 
-  box-shadow: var(--shadow);
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: flex-start;
+  box-shadow:
+    0 5px 10px rgba(65, 50, 30, 0.08),
+    0 20px 40px rgba(65, 50, 30, 0.12);
 
   text-align: center;
 
-  overflow: visible;
-
-  transform: rotate(-0.18deg);
+  transform: rotate(-0.15deg);
 
   transition:
     transform 0.25s ease,
@@ -279,10 +231,10 @@ body {
 }
 
 
-/* Slight rotation difference between papers */
+/* Alternate paper angle */
 
 .journal-card:nth-child(even) {
-  transform: rotate(0.18deg);
+  transform: rotate(0.15deg);
 }
 
 
@@ -290,12 +242,12 @@ body {
 
 .journal-card:hover {
   transform:
-    translateY(-5px)
+    translateY(-4px)
     rotate(0deg);
 
   box-shadow:
-    0 10px 20px rgba(65, 50, 30, 0.10),
-    0 25px 50px rgba(65, 50, 30, 0.13);
+    0 8px 14px rgba(65, 50, 30, 0.10),
+    0 25px 50px rgba(65, 50, 30, 0.14);
 }
 
 
@@ -311,17 +263,14 @@ body {
   width: 115px;
   height: 30px;
 
-  top: -13px;
-
+  top: -14px;
   left: 50%;
 
   transform:
     translateX(-50%)
-    rotate(-2deg);
+    rotate(-1deg);
 
   background: rgba(206, 185, 145, 0.45);
-
-  z-index: 5;
 
   pointer-events: none;
 }
@@ -334,8 +283,6 @@ body {
 .journal-card-main {
   width: 100%;
 
-  max-width: 950px;
-
   display: flex;
 
   flex-direction: column;
@@ -347,7 +294,7 @@ body {
 
 
 /* =========================================================
-   HOME JOURNAL DATE
+   HOME JOURNAL TIMESTAMP
 ========================================================= */
 
 .journal-card-main::before {
@@ -357,34 +304,44 @@ body {
 }
 
 
-/* The date is placed in the side section by JS,
-   so we move that section into the visual center. */
+/* Timestamp is generated by JS inside journal-card-side */
+
+.journal-card-side {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  width: 100%;
+
+  margin-top: 0;
+}
 
 
 /* =========================================================
    HOME JOURNAL TITLE
+   IMPORTANT:
+   This targets the actual HTML generated by script.js:
+   .journal-card-main h2
 ========================================================= */
 
 .journal-card-main h2 {
-  margin: 0 0 18px;
+  margin: 0 0 10px;
 
-  order: 2;
+  font-family: "Playfair Display", Georgia, serif;
 
-  color: var(--title);
-
-  font-family:
-    "Playfair Display",
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: clamp(30px, 4vw, 43px);
+  font-size: clamp(30px, 4vw, 42px);
 
   font-weight: 700;
 
   line-height: 1.15;
 
   letter-spacing: -0.5px;
+
+  color: var(--title-red);
+
+  text-align: center;
 }
 
 
@@ -393,22 +350,19 @@ body {
 .journal-card-main h2 span {
   display: block;
 
-  margin-top: 10px;
+  margin-top: 8px;
 
-  color: var(--muted);
-
-  font-family:
-    "DM Sans",
-    Arial,
-    sans-serif;
+  font-family: "DM Sans", sans-serif;
 
   font-size: 12px;
 
-  font-weight: 700;
+  font-weight: 600;
 
   letter-spacing: 0.12em;
 
   text-transform: uppercase;
+
+  color: var(--muted);
 }
 
 
@@ -417,49 +371,21 @@ body {
 ========================================================= */
 
 .journal-card-main p {
-  width: 100%;
-
-  max-width: 900px;
+  width: min(950px, 100%);
 
   margin: 0 auto;
 
-  color: #4f4a43;
+  color: #3f3b35;
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: "DM Sans", sans-serif;
 
-  font-size: 18px;
+  font-size: 16px;
 
-  line-height: 1.75;
+  font-weight: 400;
 
-  text-align: center;
-
-  order: 3;
-}
-
-
-/* =========================================================
-   HOME JOURNAL SIDE
-========================================================= */
-
-.journal-card-side {
-  width: 100%;
-
-  max-width: 950px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
+  line-height: 1.7;
 
   text-align: center;
-
-  order: 1;
 }
 
 
@@ -468,40 +394,39 @@ body {
 ========================================================= */
 
 .posted {
-  order: 1;
+  order: -1;
 
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 
   color: var(--muted);
 
-  font-family:
-    "Caveat",
-    cursive;
+  font-family: "DM Sans", sans-serif;
 
-  font-size: 20px;
+  font-size: 13px;
 
   font-weight: 600;
 
-  letter-spacing: 0.02em;
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
 
   text-align: center;
 }
 
 
 /* =========================================================
-   READ JOURNAL BUTTON
+   HOME READ JOURNAL BUTTON
 ========================================================= */
 
 .read-button {
   display: inline-flex;
 
   align-items: center;
-
   justify-content: center;
 
   gap: 8px;
 
-  margin-top: 32px;
+  margin-top: 27px;
 
   padding: 11px 20px;
 
@@ -513,10 +438,7 @@ body {
 
   color: var(--ink);
 
-  font-family:
-    "DM Sans",
-    Arial,
-    sans-serif;
+  font-family: "DM Sans", sans-serif;
 
   font-size: 13px;
 
@@ -529,30 +451,21 @@ body {
   transition:
     background 0.2s ease,
     color 0.2s ease,
-    transform 0.2s ease,
-    border-color 0.2s ease;
+    transform 0.2s ease;
 }
 
-
-/* Arrow */
 
 .read-button::after {
   content: "→";
 
   font-size: 17px;
-
-  line-height: 1;
 }
 
-
-/* Hover */
 
 .read-button:hover {
   background: var(--ink);
 
-  border-color: var(--ink);
-
-  color: #ffffff;
+  color: white;
 
   transform: translateX(3px);
 }
@@ -567,20 +480,12 @@ body {
 
   padding: 8px;
 
-  background: #252522;
+  background: #000;
 }
 
 
-/* =========================================================
-   EDITOR TOOLBAR
-========================================================= */
-
 .editor-toolbar {
   min-height: 48px;
-
-  background: #30302d;
-
-  border: 3px solid #171715;
 
   display: flex;
 
@@ -590,16 +495,20 @@ body {
 
   padding: 4px 6px;
 
-  color: #ffffff;
+  background: #303030;
+
+  border: 3px solid #000;
+
+  color: #fff;
 }
 
 
 .back-link {
-  color: #ffffff;
+  color: #fff;
 
   text-decoration: none;
 
-  font-weight: 700;
+  font-weight: 900;
 
   white-space: nowrap;
 
@@ -612,7 +521,7 @@ body {
 
   display: inline-block;
 
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 
@@ -629,7 +538,7 @@ body {
 
   background: #161616;
 
-  color: #ffffff;
+  color: #fff;
 
   border: 1px solid #6d6d6d;
 
@@ -638,7 +547,7 @@ body {
 
 
 .toolbar-group button:hover {
-  background: #555555;
+  background: #555;
 }
 
 
@@ -649,17 +558,17 @@ body {
 
   min-width: 180px;
 
-  background: #161616;
-
-  border: 1px solid #6d6d6d;
-
   display: flex;
 
   align-items: center;
 
+  gap: 8px;
+
   padding: 0 8px;
 
-  gap: 8px;
+  background: #161616;
+
+  border: 1px solid #6d6d6d;
 }
 
 
@@ -668,7 +577,7 @@ body {
 
   font-weight: 900;
 
-  color: #aaaaaa;
+  color: #aaa;
 }
 
 
@@ -683,26 +592,31 @@ body {
 
   outline: 0;
 
-  color: #ffffff;
+  color: #fff;
 
   font-size: 15px;
 }
 
 
 .post-button {
-  border: 3px solid #000;
-
-  background: var(--title);
-
-  color: #ffffff;
+  min-width: 190px;
 
   padding: 7px 25px;
 
-  min-width: 190px;
+  border: 3px solid #000;
+
+  background: var(--green);
+
+  color: #fff;
 
   font-weight: 900;
 
   cursor: pointer;
+}
+
+
+.post-button:hover {
+  filter: brightness(1.08);
 }
 
 
@@ -729,23 +643,20 @@ body {
 
   outline: none;
 
-  background-color: #fffdf7;
+  background-color: var(--paper);
 
   background-image:
     repeating-linear-gradient(
       to bottom,
       transparent 0,
       transparent 20px,
-      rgba(92, 62, 32, 0.18) 21px,
+      var(--paper-line) 21px,
       transparent 22px
     );
 
   border: 3px solid #000;
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Georgia, "Times New Roman", serif;
 
   font-size: 18px;
 
@@ -767,9 +678,9 @@ body {
 
   justify-content: space-between;
 
-  color: #ffffff;
-
   padding: 7px 5px;
+
+  color: #fff;
 
   font-size: 13px;
 }
@@ -781,63 +692,31 @@ body {
 
 
 .write-status {
-  color: #ffffff;
+  min-height: 20px;
+
+  color: #fff;
 
   text-align: center;
-
-  min-height: 20px;
 }
 
 
 /* =========================================================
-   READ JOURNAL PAGE
+   INDIVIDUAL READ JOURNAL PAGE
 ========================================================= */
 
 .entry-page {
-  width: min(1100px, calc(100% - 60px));
+  width: min(1120px, calc(100% - 60px));
 
   margin: 0 auto;
 
   padding: 0 0 80px;
-
-  text-align: center;
 }
 
 
-/* =========================================================
-   BACK TO JOURNAL
-========================================================= */
+/* Back link */
 
-.entry-page .back-link {
-  display: inline-block;
-
-  margin-bottom: 25px;
-
-  color: var(--muted);
-
-  font-family:
-    "DM Sans",
-    Arial,
-    sans-serif;
-
-  font-size: 13px;
-
-  font-weight: 700;
-
-  text-decoration: none;
-
-  letter-spacing: 0.04em;
-
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-
-.entry-page .back-link:hover {
-  color: var(--title);
-
-  transform: translateX(-3px);
+.entry-page > .back-link {
+  margin-bottom: 20px;
 }
 
 
@@ -850,29 +729,27 @@ body {
 
   width: 100%;
 
-  min-height: 600px;
-
   padding: 55px 75px 70px;
 
   background:
     linear-gradient(
-      rgba(255, 255, 255, 0.72),
-      rgba(255, 255, 255, 0.72)
+      rgba(255, 255, 255, 0.84),
+      rgba(255, 255, 255, 0.84)
     ),
     var(--paper);
 
   border: 1px solid rgba(100, 85, 65, 0.12);
 
-  box-shadow: var(--shadow);
+  box-shadow:
+    0 5px 10px rgba(65, 50, 30, 0.08),
+    0 20px 40px rgba(65, 50, 30, 0.12);
 
   text-align: center;
-
-  transform: rotate(0.15deg);
 }
 
 
 /* =========================================================
-   READ JOURNAL PAPER TAPE
+   READ PAGE TAPE
 ========================================================= */
 
 .full-entry::before {
@@ -883,13 +760,12 @@ body {
   width: 115px;
   height: 30px;
 
-  top: -13px;
-
+  top: -14px;
   left: 50%;
 
   transform:
     translateX(-50%)
-    rotate(-2deg);
+    rotate(-1deg);
 
   background: rgba(206, 185, 145, 0.45);
 
@@ -898,40 +774,32 @@ body {
 
 
 /* =========================================================
-   READ JOURNAL DATE
+   READ PAGE DATE
 ========================================================= */
 
 .entry-meta {
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 
   color: var(--muted);
 
-  font-family:
-    "Caveat",
-    cursive;
+  font-family: "Caveat", cursive;
 
-  font-size: 21px;
+  font-size: 20px;
 
-  font-weight: 600;
+  font-weight: 500;
 
   text-align: center;
 }
 
 
 /* =========================================================
-   READ JOURNAL TITLE
+   READ PAGE TITLE
 ========================================================= */
 
 .full-entry h1 {
-  margin: 0 auto 10px;
+  margin: 0 0 8px;
 
-  color: var(--title);
-
-  font-family:
-    "Playfair Display",
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: "Playfair Display", Georgia, serif;
 
   font-size: clamp(42px, 6vw, 64px);
 
@@ -941,23 +809,22 @@ body {
 
   letter-spacing: -1px;
 
+  color: var(--title-red);
+
   text-align: center;
 }
 
 
 /* =========================================================
-   READ JOURNAL ANONYMOUS
+   READ PAGE ANONYMOUS
 ========================================================= */
 
-.full-entry .anonymous {
-  margin: 0 0 30px;
+.anonymous {
+  margin-bottom: 28px;
 
   color: var(--muted);
 
-  font-family:
-    "DM Sans",
-    Arial,
-    sans-serif;
+  font-family: "DM Sans", sans-serif;
 
   font-size: 13px;
 
@@ -972,73 +839,56 @@ body {
 
 
 /* =========================================================
-   READ JOURNAL DIVIDER
+   READ PAGE DIVIDER
 ========================================================= */
 
 .full-entry hr {
-  width: 90%;
-
-  height: 1px;
+  width: 92%;
 
   margin: 0 auto 38px;
 
   border: 0;
 
-  background: var(--line);
+  border-top: 1px solid var(--line);
 }
 
 
 /* =========================================================
-   READ JOURNAL CONTENT
+   READ PAGE CONTENT
 ========================================================= */
 
 .entry-content {
-  width: 100%;
-
-  max-width: 950px;
+  max-width: 930px;
 
   margin: 0 auto;
 
-  color: #403c36;
+  color: #413d37;
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Georgia, "Times New Roman", serif;
 
   font-size: 20px;
 
-  line-height: 1.8;
+  line-height: 1.85;
 
-  text-align: center;
+  text-align: left;
 
   overflow-wrap: anywhere;
 }
 
-
-/* Paragraphs */
 
 .entry-content p {
   margin-bottom: 18px;
 }
 
 
-/* Lists */
-
 .entry-content ul,
 .entry-content ol {
-  width: fit-content;
-
-  max-width: 100%;
-
-  margin: 0 auto 18px;
-
-  text-align: left;
+  margin: 0 0 18px 30px;
 }
 
 
 /* =========================================================
-   READ JOURNAL FOOTER
+   READ PAGE FOOTER
 ========================================================= */
 
 .entry-bottom {
@@ -1050,32 +900,9 @@ body {
 
   color: var(--muted);
 
-  font-family:
-    "DM Sans",
-    Arial,
-    sans-serif;
-
-  font-size: 12px;
+  font-size: 13px;
 
   font-weight: 600;
-
-  letter-spacing: 0.04em;
-
-  text-align: center;
-}
-
-
-/* =========================================================
-   EMPTY / ERROR STATES
-========================================================= */
-
-#entry-status {
-  color: var(--muted);
-
-  font-family:
-    "DM Sans",
-    Arial,
-    sans-serif;
 
   text-align: center;
 }
@@ -1087,44 +914,35 @@ body {
 
 @media (max-width: 800px) {
 
-  /* Header */
-
   .site-header {
-    width: min(100% - 30px, 1320px);
+    width: calc(100% - 30px);
 
-    padding-top: 25px;
+    padding-top: 20px;
 
-    padding-bottom: 42px;
+    flex-direction: column;
 
-    align-items: flex-start;
+    align-items: center;
+
+    text-align: center;
+
+    gap: 25px;
   }
 
 
   .brand {
-    font-size: 42px;
+    font-size: 46px;
 
-    letter-spacing: -2px;
-  }
-
-
-  .brand::after {
-    width: 65px;
-
-    margin-top: 13px;
+    letter-spacing: -1.5px;
   }
 
 
   .header-button {
-    padding: 12px 17px;
-
-    font-size: 12px;
+    padding: 12px 20px;
   }
 
 
-  /* Home */
-
   .feed-page {
-    width: min(100% - 30px, 1320px);
+    width: calc(100% - 24px);
   }
 
 
@@ -1134,47 +952,27 @@ body {
 
 
   .journal-card {
-    min-height: 380px;
-
-    padding: 45px 28px 45px;
-  }
-
-
-  .journal-card-main {
-    max-width: 100%;
+    padding: 42px 24px 45px;
   }
 
 
   .journal-card-main h2 {
-    font-size: 31px;
+    font-size: 32px;
   }
 
 
   .journal-card-main p {
-    font-size: 17px;
-
-    line-height: 1.7;
+    font-size: 15px;
   }
 
-
-  .posted {
-    font-size: 19px;
-
-    margin-bottom: 22px;
-  }
-
-
-  /* Read page */
 
   .entry-page {
-    width: min(100% - 30px, 1100px);
+    width: calc(100% - 24px);
   }
 
 
   .full-entry {
-    min-height: 500px;
-
-    padding: 48px 28px 55px;
+    padding: 45px 25px 55px;
   }
 
 
@@ -1189,15 +987,6 @@ body {
     line-height: 1.75;
   }
 
-
-  .full-entry hr {
-    width: 100%;
-
-    margin-bottom: 30px;
-  }
-
-
-  /* Editor */
 
   .editor-toolbar {
     flex-wrap: wrap;
@@ -1237,47 +1026,13 @@ body {
 
 @media (max-width: 500px) {
 
-  .site-header {
-    width: calc(100% - 22px);
-
-    padding-top: 20px;
-
-    padding-bottom: 35px;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    text-align: center;
-  }
-
-
   .brand {
-    font-size: 40px;
-  }
-
-
-  .brand::after {
-    margin-left: auto;
-
-    margin-right: auto;
-  }
-
-
-  .header-button {
-    margin-top: 4px;
-  }
-
-
-  .feed-page {
-    width: calc(100% - 22px);
+    font-size: 38px;
   }
 
 
   .journal-card {
-    min-height: 360px;
-
-    padding: 40px 20px 40px;
+    padding: 38px 18px 40px;
   }
 
 
@@ -1287,29 +1042,12 @@ body {
 
 
   .journal-card-main p {
-    font-size: 16px;
-
-    line-height: 1.65;
-  }
-
-
-  .posted {
-    font-size: 18px;
-  }
-
-
-  .read-button {
-    margin-top: 26px;
-  }
-
-
-  .entry-page {
-    width: calc(100% - 22px);
+    font-size: 14px;
   }
 
 
   .full-entry {
-    padding: 42px 20px 48px;
+    padding: 40px 20px 45px;
   }
 
 
@@ -1319,13 +1057,11 @@ body {
 
 
   .entry-meta {
-    font-size: 19px;
+    font-size: 18px;
   }
 
 
   .entry-content {
     font-size: 17px;
-
-    line-height: 1.7;
   }
 }
