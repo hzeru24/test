@@ -1032,23 +1032,18 @@ body {
 
 .entry-content {
   max-width: 930px;
-
   margin: 0 auto;
-
   color: #413d37;
-
   font-family:
     Georgia,
     "Times New Roman",
     serif;
-
   font-size: 20px;
-
   line-height: 1.85;
-
-  text-align: left;
-
+  text-align: justify;
   overflow-wrap: anywhere;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 
 
